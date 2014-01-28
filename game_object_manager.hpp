@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _VIDIBLE_GAME_OBJECT_HPP
+#define _VISIBLE_GAME_OBJECT_HPP
 
 #include "visible_game_object.hpp"
 
@@ -28,3 +29,5 @@ class Game_object_manager {
     }
   };
 };
+
+#endif  // _VISIBLE_GAME_OBJECT_HPP

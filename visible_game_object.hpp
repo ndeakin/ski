@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _VISIBLE_GAME_OBJECT_HPP
+#define _VISIBLE_GAME_OBJECT_HPP
 
 class Visible_game_object {
  public:
@@ -26,3 +27,5 @@ class Visible_game_object {
   std::string m_filename;
   bool        m_is_loaded;
 };
+
+#endif // _VISIBLE_GAME_OBJECT_HPP

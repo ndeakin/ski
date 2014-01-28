@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _GAME_HPP
+#define _GAME_HPP
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -34,3 +35,5 @@ class Gane {
   static sf::RenderWindow     g_main_window;
   static Game_object_manager  g_game_object_manager;
 };
+
+#endif // _GAME_HPP

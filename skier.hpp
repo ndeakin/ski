@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _SKIER_HPP
+#define _SKIER_HPP
 
 #include "visible_game_object.hpp"
 
@@ -16,3 +17,5 @@ class Skier : public Visible_game_object {
   float m_velocity; // -- left ++ right
   float m_terminal_velocity;
 };
+
+#endif // _SKIER_HPP
