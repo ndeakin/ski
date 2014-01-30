@@ -1,5 +1,5 @@
-#ifndef _VIDIBLE_GAME_OBJECT_HPP
-#define _VISIBLE_GAME_OBJECT_HPP
+#ifndef _GAME_OBJECT_MANAGER_HPP
+#define _GAME_OBJECT_MANAGER_HPP
 
 #include "visible_game_object.hpp"
 
@@ -8,7 +8,7 @@ class Game_object_manager {
   Game_object_manager();
   ~Game_object_manager();
 
-  void Add( std::string name, Visible_game_object * game_object);
+  void Add( std::string name, Visible_game_object * game_object );
   void Remove( std::string name );
   int Get_object_count() const;
   Visible_game_object * Get( std::string name ) const;
@@ -16,7 +16,7 @@ class Game_object_manager {
   void Draw_all( sf::RenderWindow & render_window );
   void Update_all();
 
-  const static Game_object_manager & Get_object_manager();
+  const static Game_object_manager & Get_game_object_manager();
 
  private:
   std::map< std::string, Visible_game_object * > m_game_objects;
@@ -30,4 +30,4 @@ class Game_object_manager {
   };
 };
 
-#endif  // _VISIBLE_GAME_OBJECT_HPP
+#endif  // _GAME_OBJECT_MANAGER_HPP

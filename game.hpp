@@ -7,13 +7,13 @@
 #include "game_object_manager.hpp"
 #include "skier.hpp"
 
-class Gane {
+class Game {
  public:
   static void Start();
-  static sf::RenderWindow & GetWindow();
+  static sf::RenderWindow & Get_window();
   
-  const static sf::Input & GetInput();
-  const statuc Game_object_manager & Game::Get_game_object_manager();
+  const static sf::Keyboard::Key & Get_input();
+  const static Game_object_manager & Get_game_object_manager();
   
   const static int SCREEN_WIDTH =  1600;
   const static int SCREEN_HEIGHT = 900;

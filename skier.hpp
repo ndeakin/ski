@@ -13,7 +13,7 @@ class Skier : public Visible_game_object {
 
   float Get_velocity() const;
 
- privat:
+ private:
   float m_velocity; // -- left ++ right
   float m_terminal_velocity;
 };

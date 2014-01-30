@@ -1,6 +1,9 @@
 #ifndef _VISIBLE_GAME_OBJECT_HPP
 #define _VISIBLE_GAME_OBJECT_HPP
 
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
 class Visible_game_object {
  public:
   Visible_game_object();
@@ -12,7 +15,7 @@ class Visible_game_object {
 
   virtual void Set_position( float x, float y );
   virtual sf::Vector2f Get_position() const;
-  virtual bool Is_loader() const;
+  virtual bool Is_loaded() const;
 
   virtual float Get_width() const;
   virtual float Get_height() const;
@@ -23,7 +26,7 @@ class Visible_game_object {
 
  private:
   sf::Sprite  m_sprite;
-  sf::Image   m_image;
+  sf::Texture m_texture;
   std::string m_filename;
   bool        m_is_loaded;
 };
