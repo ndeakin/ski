@@ -1,22 +1,27 @@
-ski : ski.o
-	g++ -o ski ski.o game.o game_object_manager.o \
+# Various file directory definitions
+OBJSDIR = x64_windows
+SRCDIR = src
+
+# compiler and compiler flags
+CC = g++
+#CPPFLAGS = -O
+
+SKIOBJS = $(OBJSDIR)/ski.o $(OBJSDIR)/game.o $(OBJSDIR)/game_object_manager.o \
+  $(OBJSDIR)/skier.o $(OBJSDIR)/visible_game_object.o
+
+ski : $(SKIOBJS)
+	$(CC) -o $(OBJSDIR)/ski $(SKIOBJS) \
   -L SFML-2.1/lib -lsfml-graphics -lsfml-window
 
-ski.o : ski.cpp game.hpp visible_game_object.hpp \
-        game.o game_object_manager.o skier.o visible_game_object.o
-	g++ -O -c ski.cpp -I SFML-2.1/include
+$(OBJSDIR)/%.o : $(SRCDIR)/%.cpp
+	$(CC) -I SFML-2.1/include -c -o $@ $<
 
-game.o : game.cpp game.hpp
-	g++ -O -c game.cpp -I SFML-2.1/include
+.PHONY: clean
+.PHONY: clean-only
 
-game_object_manager.o : game_object_manager.cpp game_object_manager.hpp
-	g++ -O -c game_object_manager.cpp -I SFML-2.1/include
+clean-only :
+	rm -f $(OBJSDIR)\ski.exe 
+	rm -f $(OBJSDIR)\*.o
 
-skier.o : skier.cpp skier.hpp
-	g++ -O -c skier.cpp -I SFML-2.1/include
-
-visible_game_object.o : visible_game_object.cpp visible_game_object.hpp
-	g++ -O -c visible_game_object.cpp -I SFML-2.1/include
-
-clean :
-	rm ski.exe ski.o game.o game_object_manager.o skier.o visible_game_object.o
+clean : clean-only
+	make
