@@ -13,8 +13,8 @@ going into game.cpp (which has an associated header, game.hpp).  game.cpp
 usese instances of the classes declared in game_object_manager.hpp and
 skier.hpp (and their associated .cpp files).  Last but not least, the Skier
 class derives from the Visible_game_object class, declared and derived in
-its similarly named .hpp and .cpp files.  The SFML-2.1 is the SFML media
-library that the project uses.
+its similarly named .hpp and .cpp files.  The SFML-2.1 directory contains the
+the SFML media library that the project uses.
 
 
 Future Development
