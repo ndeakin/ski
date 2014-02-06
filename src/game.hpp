@@ -21,6 +21,7 @@ class Game {
  private:
   static bool Is_exiting();
   static void Game_loop();
+  static void Do_game_loop( double current_time, double delta_time );
 
   static void Show_splash_screen();
   static bool Show_menu();
@@ -34,6 +35,7 @@ class Game {
   static Game_state           g_game_state;
   static sf::RenderWindow     g_main_window;
   static Game_object_manager  g_game_object_manager;
+  static bool                 g_is_multiplayer;
 };
 
 #endif // _GAME_HPP

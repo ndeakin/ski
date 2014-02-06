@@ -1,32 +1,64 @@
+#include "game.hpp"
 #include "game_object_manager.hpp"
 
 Game_object_manager::Game_object_manager() {
 
 }
 
-Game_object_manager::~Game_object_manager() {}
+Game_object_manager::~Game_object_manager() {
+  std::for_each( m_game_objects.begin(), m_game_objects.end(), Game_object_deallocator() );
+}
 
 void Game_object_manager::Add( std::string name, Visible_game_object * game_object ) {
-  
+  m_game_objects.insert( std::pair< std::string, Visible_game_object * >( 
+                                                                name, game_object ) );
 }
 
 void Game_object_manager::Remove( std::string name ) {
-
+  
+  m_game_objects.erase( m_game_objects.find( name ) );
 }
 
 int Game_object_manager::Get_object_count() const {
-
+  // TODO: Implement
 }
 
 Visible_game_object * Game_object_manager::Get( std::string name ) const {
-
+  std::map< std::string, Visible_game_object * >::const_iterator results = 
+        m_game_objects.find( name );
+  if( results == m_game_objects.end() ) {
+    return NULL;
+  }
 }
 
 void Game_object_manager::Draw_all( sf::RenderWindow & render_window ) {
+  std::map< std::string, Visible_game_object * >::const_iterator itr = 
+                                                                m_game_objects.begin();
 
+  while( itr != m_game_objects.end() ) {
+    itr->second->Draw( render_window );
+    ++itr;
+  }
 }
 
 void Game_object_manager::Update_all() {
+  
+  // TODO: make a Game::g_game_state getter function.
+  //       currently it's private, so can't get at it.
+  #if 0
+  if( g_game_state != Game::PLAYING ) {
+    return;
+  }
+  #endif
 
+  std::map< std::string, Visible_game_object * >::const_iterator itr =
+                                                                 m_game_objects.begin();
+  // TODO: impliment a timer (likely using sf::Clock) to track time between frames
+  float time_delta = 0; //Game::Get_window().getFrameTime();
+
+  while( itr != m_game_objects.end() ) {
+    itr->second->Update( time_delta );
+    itr++;
+  }
 }
 

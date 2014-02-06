@@ -43,6 +43,12 @@ sf::Vector2f Visible_game_object::Get_position() const {
   return sf::Vector2f();
 }
 
+void Visible_game_object::Move( float x, float y ) {
+  if( m_is_loaded ) {
+    m_sprite.move( x, y );
+  }
+}
+
 sf::Sprite & Visible_game_object::Get_sprite() {
   return m_sprite;
 }

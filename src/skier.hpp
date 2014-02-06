@@ -9,7 +9,6 @@ class Skier : public Visible_game_object {
   ~Skier();
 
   void Update( float elapsed_time );
-  void Draw( sf::RenderWindow & rw );
 
   float Get_velocity() const;
 

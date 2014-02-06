@@ -17,6 +17,8 @@ class Visible_game_object {
   virtual sf::Vector2f Get_position() const;
   virtual bool Is_loaded() const;
 
+  void Move( float x, float y );
+
   virtual float Get_width() const;
   virtual float Get_height() const;
   virtual sf::Rect< float > Get_bounding_rect() const;
