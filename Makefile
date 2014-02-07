@@ -7,7 +7,7 @@ CC = g++
 CPPFLAGS = -c -o
 LDFLAGS = -std=c++0x
 ifdef _DEBUG
-  LDFLAGS += -ggdb
+  LDFLAGS += -g
 endif
 
 SKIOBJS = $(OBJSDIR)/ski.o $(OBJSDIR)/game.o $(OBJSDIR)/game_object_manager.o \
@@ -15,7 +15,7 @@ SKIOBJS = $(OBJSDIR)/ski.o $(OBJSDIR)/game.o $(OBJSDIR)/game_object_manager.o \
 
 ski : $(SKIOBJS)
 	$(CC) -o $(OBJSDIR)/ski $(LDFLAGS) $(SKIOBJS) \
-  -L SFML-2.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+  -L SFML-2.1/lib -lsfml-graphics-d -lsfml-window-d -lsfml-system-d
 
 $(OBJSDIR)/%.o : $(SRCDIR)/%.cpp
 	$(CC) -I SFML-2.1/include $(CPPFLAGS) $@ $<

@@ -3,6 +3,7 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Time.hpp>
 
 class Visible_game_object {
  public:
@@ -11,7 +12,7 @@ class Visible_game_object {
 
   virtual void Load( std::string filename );
   virtual void Draw( sf::RenderWindow & window );
-  virtual void Update( float elapsed_time );
+  virtual void Update( sf::Time elapsed_time );
 
   virtual void Set_position( float x, float y );
   virtual sf::Vector2f Get_position() const;

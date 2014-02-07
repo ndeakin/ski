@@ -48,25 +48,42 @@ void Game::Start() {
 }
 
 void Game::Game_loop() {
-  double dt = 1/60;
+  sf::Time dt = sf::seconds( 1.0f / 60.0f );
   sf::Clock clock;
 
-  double current_time = 0.0f;
+  std::stringstream timestream;
+
+  sf::Time current_time = clock.getElapsedTime();
   while( !Is_exiting() ) {
-    double new_time = clock.getElapsedTime().asMicroseconds();
-    double frame_time = new_time - current_time;
+    sf::Time new_time = clock.getElapsedTime();
+    sf::Time frame_time = new_time - current_time;
     current_time = new_time;
 
-    while( frame_time > 0.0 && !Is_exiting() ) {
-               // delta time is min( frame_time, dt );
-      const float delta_time = frame_time > dt ? dt : frame_time;
-     
-      std::ostringstream s;
-      s << current_time << "\n";
-      printf( s.str().c_str() );
+    while( frame_time > sf::microseconds( 0 ) && !Is_exiting() ) {
+      // delta time is the lower of frame_time and dt
+      sf::Time delta_time = (( frame_time > dt ) ? dt : frame_time);
 
-      Do_game_loop( current_time, delta_time );
+      // The section below can be very useful for testing.
+      // It is left in for now since it may be needed again soon.
+      #if 0
+      std::stringstream nt, ft, dt;
+      nt << new_time.asMicroseconds();
+      ft << frame_time.asMicroseconds();
+      dt << delta_time.asMicroseconds();
+      printf( "new_time: %s\nframe_time: %s\ndelta_time: %s\n",
+              nt.str().c_str(), ft.str().c_str(), dt.str().c_str() );
+      #endif
+
+      timestream << delta_time.asMicroseconds();
+      printf( "delta_tim: %s\n", timestream.str().c_str() );
+      timestream.str("");
+
+      frame_time -= delta_time;
+
+      Update_game_state( current_time, delta_time );
     }
+
+    Render();
 
   }
 }
@@ -79,6 +96,10 @@ const Game_object_manager & Game::Get_game_object_manager() {
   return g_game_object_manager;
 }
 
+const Game::Game_state Game::Get_game_state() {
+  return g_game_state;
+}
+
 bool Game::Is_exiting() {
   if( g_game_state == Game::EXITING ) {
     return true;
@@ -87,7 +108,7 @@ bool Game::Is_exiting() {
   }
 }
 
-void Game::Do_game_loop( double current_time, double delta_time ) {
+void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
   sf::Event current_event;
   g_main_window.pollEvent( current_event );
 
@@ -111,9 +132,7 @@ void Game::Do_game_loop( double current_time, double delta_time ) {
     case Game::PLAYING: {
       g_main_window.clear( sf::Color( 0, 0, 0 ) );
 
-      g_game_object_manager.Update_all();
-      g_game_object_manager.Draw_all( g_main_window );
-      g_main_window.display();
+      g_game_object_manager.Update_all( delta_time );
 
       if( current_event.type == sf::Event::Closed ) {
         g_game_state = Game::EXITING;
@@ -129,6 +148,11 @@ void Game::Do_game_loop( double current_time, double delta_time ) {
       break;
     }
   }
+}
+
+void Game::Render() {
+  g_game_object_manager.Draw_all( g_main_window );
+  g_main_window.display();
 }
 
 void Game::Show_splash_screen() {

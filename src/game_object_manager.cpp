@@ -41,23 +41,21 @@ void Game_object_manager::Draw_all( sf::RenderWindow & render_window ) {
   }
 }
 
-void Game_object_manager::Update_all() {
+void Game_object_manager::Update_all( sf::Time delta_time ) {
   
-  // TODO: make a Game::g_game_state getter function.
-  //       currently it's private, so can't get at it.
-  #if 0
-  if( g_game_state != Game::PLAYING ) {
+  if( Game::Get_game_state() != Game::PLAYING ) {
     return;
   }
-  #endif
-
   std::map< std::string, Visible_game_object * >::const_iterator itr =
                                                                  m_game_objects.begin();
-  // TODO: impliment a timer (likely using sf::Clock) to track time between frames
-  float time_delta = 0; //Game::Get_window().getFrameTime();
+  
+  // Currently doing timing ourself, but might want this instead at some point
+  #if 0
+  Game::Get_window().getFrameTime();
+  #endif
 
   while( itr != m_game_objects.end() ) {
-    itr->second->Update( time_delta );
+    itr->second->Update( delta_time );
     itr++;
   }
 }

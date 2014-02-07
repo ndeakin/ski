@@ -26,7 +26,7 @@ void Visible_game_object::Draw( sf::RenderWindow & render_window ) {
   }
 }
 
-void Visible_game_object::Update( float elapsed_time ) {
+void Visible_game_object::Update( sf::Time elapsed_time ) {
 
 }
 

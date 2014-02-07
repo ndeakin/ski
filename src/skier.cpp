@@ -8,18 +8,25 @@ Skier::Skier()
 
 Skier::~Skier() {}
 
-void Skier::Update( float elapsed_time ) {
+void Skier::Update( sf::Time elapsed_time ) {
+  
+  // moving a number of pixels equal to the number of ms that the button
+  // is pressed.  This seems to work nicely; the rate of acceleration that the
+  // skier receives can be adjusted by changing the multiplier of elapsed_time.
+  // (The current multiplier is 1)
+  double amount = elapsed_time.asMilliseconds();
+
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) ) {
-    Move( 1.0f, 0.0f );
+    Move( amount, 0.0f );
   }
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) ) {
-    Move( -1.0f, 0.0f );
+    Move( -amount, 0.0f );
   }
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) ) {
-    Move( 0.0f, -1.0f );
+    Move( 0.0f, -amount );
   }
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) ) {
-    Move( 0.0f, 1.0f );
+    Move( 0.0f, amount );
   }
 }
 

@@ -1,6 +1,8 @@
 #ifndef _GAME_OBJECT_MANAGER_HPP
 #define _GAME_OBJECT_MANAGER_HPP
 
+#include <SFML/System/Time.hpp>
+
 #include "visible_game_object.hpp"
 
 class Game_object_manager {
@@ -14,7 +16,7 @@ class Game_object_manager {
   Visible_game_object * Get( std::string name ) const;
 
   void Draw_all( sf::RenderWindow & render_window );
-  void Update_all();
+  void Update_all( sf::Time delta_time );
 
   const static Game_object_manager & Get_game_object_manager();
 
