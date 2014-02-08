@@ -32,7 +32,7 @@ void Game::Start() {
                         sf::Style::Fullscreen );
  
   // TODO:  move g_game_object_manager.Add() into Visible_game_object dtor
-  Skier * skier = new Skier();
+  Skier * skier = new Skier( sf::IntRect( 60, 65, 55, 50 ) );
   g_game_object_manager.Add( "Skier", skier ); 
   
   g_game_state = Game::PLAYING;
@@ -48,9 +48,10 @@ void Game::Start() {
 }
 
 void Game::Game_loop() {
-  sf::Time dt = sf::seconds( 1.0f / 60.0f );
+  sf::Time dt = sf::seconds( 1.0f / 80.0f );
   sf::Clock clock;
 
+  // For test, as commented out below
   std::stringstream timestream;
 
   sf::Time current_time = clock.getElapsedTime();
@@ -59,7 +60,7 @@ void Game::Game_loop() {
     sf::Time frame_time = new_time - current_time;
     current_time = new_time;
 
-    while( frame_time > sf::microseconds( 0 ) && !Is_exiting() ) {
+    for( int i = 0; frame_time > sf::microseconds( 0 ) && i < 3 && !Is_exiting(); ++i ) {
       // delta time is the lower of frame_time and dt
       sf::Time delta_time = (( frame_time > dt ) ? dt : frame_time);
 
@@ -72,11 +73,11 @@ void Game::Game_loop() {
       dt << delta_time.asMicroseconds();
       printf( "new_time: %s\nframe_time: %s\ndelta_time: %s\n",
               nt.str().c_str(), ft.str().c_str(), dt.str().c_str() );
-      #endif
-
+//#endif
       timestream << delta_time.asMicroseconds();
       printf( "delta_tim: %s\n", timestream.str().c_str() );
       timestream.str("");
+      #endif
 
       frame_time -= delta_time;
 
@@ -130,7 +131,7 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
       break;
     }
     case Game::PLAYING: {
-      g_main_window.clear( sf::Color( 0, 0, 0 ) );
+      g_main_window.clear( sf::Color( 0xFF, 0xFF, 0xFF ) );
 
       g_game_object_manager.Update_all( delta_time );
 
