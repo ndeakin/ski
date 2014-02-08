@@ -1,10 +1,10 @@
 #include "skier.hpp"
 #include "visible_game_object.hpp"
 
-Skier::Skier( sf::IntRect int_rect )
+Skier::Skier()
 {
   Load( "images/skiing_sprite_sheet.png" );
-  Get_sprite().setTextureRect( int_rect );
+  Get_sprite().setTextureRect( sf::IntRect( 60, 65, 55, 50 ) );
 }
 
 Skier::~Skier() {}

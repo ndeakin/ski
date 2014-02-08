@@ -7,7 +7,7 @@
 
 class Skier : public Visible_game_object {
  public:
-  Skier( sf::IntRect int_rect );
+  Skier();
   ~Skier();
 
   void Update( sf::Time elapsed_time );

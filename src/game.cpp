@@ -32,7 +32,7 @@ void Game::Start() {
                         sf::Style::Fullscreen );
  
   // TODO:  move g_game_object_manager.Add() into Visible_game_object dtor
-  Skier * skier = new Skier( sf::IntRect( 60, 65, 55, 50 ) );
+  Skier * skier = new Skier();
   g_game_object_manager.Add( "Skier", skier ); 
   
   g_game_state = Game::PLAYING;
