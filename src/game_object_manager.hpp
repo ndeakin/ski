@@ -12,7 +12,6 @@ class Game_object_manager {
 
   void Add( std::string name, Visible_game_object * game_object );
   void Remove( std::string name );
-  int Get_object_count() const;
   Visible_game_object * Get( std::string name ) const;
 
   void Draw_all( sf::RenderWindow & render_window );

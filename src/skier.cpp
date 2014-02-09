@@ -1,9 +1,13 @@
+#include <math.h>
 #include "skier.hpp"
-#include "visible_game_object.hpp"
+#include "visible_game_object.hpp" 
 
 Skier::Skier()
+  : m_velocity( 0.0f, 0.0f ),
+    m_terminal_velocity( 10.0f )
 {
   Load( "images/skiing_sprite_sheet.png" );
+  // TODO: change how default sprite on sheet is determined
   Get_sprite().setTextureRect( sf::IntRect( 60, 65, 55, 50 ) );
 }
 
@@ -11,27 +15,55 @@ Skier::~Skier() {}
 
 void Skier::Update( sf::Time elapsed_time ) {
   
-  // moving a number of pixels equal to the number of ms that the button
-  // is pressed.  This seems to work nicely; the rate of acceleration that the
-  // skier receives can be adjusted by changing the multiplier of elapsed_time.
-  // (The current multiplier is 1)
-  double amount = elapsed_time.asMilliseconds();
+  Update_velocity( elapsed_time );
+
+  Update_sprite();
+
+}
+
+void Skier::Update_velocity( sf::Time elapsed_time ) {
+  
+  double amount = elapsed_time.asMilliseconds() / 100.0f;
+
+  // increase lateral velocity by 'amount' if the right or left arrow key
+  // is being pressed.  Decrease vertical (downward) velocity by amount
+  // if the up arrow is pressed.
 
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) ) {
-    Move( amount, 0.0f );
+    // turn right
+    m_velocity.x += amount;
   }
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) ) {
-    Move( -amount, 0.0f );
+    m_velocity.x -= amount;
   }
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) ) {
-    Move( 0.0f, -amount );
+    // slow down
+    m_velocity.y -= amount;
   }
+  #if 0
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) ) {
-    Move( 0.0f, amount );
+    // Nothing curently
+  }
+  #endif
+
+  // gravity
+  m_velocity.y += amount / 7.0f;
+
+  Normalize_velocity();
+
+}
+
+void Skier::Normalize_velocity() {
+  float velocity_squared = pow( m_velocity.x, 2 ) + pow( m_velocity.y, 2 ); 
+  if( velocity_squared > pow( m_terminal_velocity, 2 ) ) {
+    float v_ratio = pow( m_terminal_velocity, 2 ) / velocity_squared;
+    m_velocity.x *= v_ratio;
+    m_velocity.y *= v_ratio;
   }
 }
 
-float Skier::Get_velocity() const {
-  // TODO
-  return 0.0f;
+void Skier::Update_sprite() {
+  // TODO: later on, also adjust sprite used; ex change angle
+
+  Get_sprite().move( m_velocity.x, m_velocity.y );
 }

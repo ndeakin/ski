@@ -19,10 +19,6 @@ void Game_object_manager::Remove( std::string name ) {
   m_game_objects.erase( m_game_objects.find( name ) );
 }
 
-int Game_object_manager::Get_object_count() const {
-  // TODO: Implement
-}
-
 Visible_game_object * Game_object_manager::Get( std::string name ) const {
   std::map< std::string, Visible_game_object * >::const_iterator results = 
         m_game_objects.find( name );

@@ -48,11 +48,11 @@ void Game::Start() {
 }
 
 void Game::Game_loop() {
-  sf::Time dt = sf::seconds( 1.0f / 80.0f );
+  sf::Time dt = sf::seconds( 1.0f / 60.0f );
   sf::Clock clock;
 
   // For test, as commented out below
-  std::stringstream timestream;
+  // std::stringstream timestream;
 
   sf::Time current_time = clock.getElapsedTime();
   while( !Is_exiting() ) {
