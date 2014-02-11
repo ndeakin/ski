@@ -5,7 +5,8 @@
 
 namespace Util {
 
-// Return a perpendicular vector with equal magnitude
+// Return a perpendicular vector with equal magnitude;
+// alwaus rotates the vector clockwise.
 sf::Vector2f Get_perpendicular_v2f(  sf::Vector2f vec );
 
 } // namespace Util
