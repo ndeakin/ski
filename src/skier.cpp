@@ -37,15 +37,15 @@ void Skier::Update_velocity( sf::Time elapsed_time ) {
     m_velocity.x -= amount;
   }
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) ) {
-    // slow down
+    // slow down...
     m_velocity.y -= amount;
 
-    // but not too much
+    // ... but not too much
     if( m_velocity.y < 0.0f ) {
       m_velocity.y = 0.0f;
-      // friction:
-      m_velocity.x /= 1.1f;
     }
+    // friction:
+    m_velocity.x /= 1.0f + amount * 10.0f;
   }
   #if 0
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) ) {
