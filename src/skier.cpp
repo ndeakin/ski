@@ -1,4 +1,6 @@
 #include <math.h>
+
+#include "math_util.hpp"
 #include "skier.hpp"
 #include "visible_game_object.hpp" 
 
@@ -23,7 +25,10 @@ void Skier::Update( sf::Time elapsed_time ) {
 
 void Skier::Update_velocity( sf::Time elapsed_time ) {
   
-  double amount = elapsed_time.asMilliseconds() / 100.0f;
+  // This multiplier acts as a general physics speed modifier.
+  // All other similar multiplying values behave as relative intensities
+  // compared to other physics effects
+  double amount = elapsed_time.asMilliseconds() / 1.0f;
 
   // increase lateral velocity by 'amount' if the right or left arrow key
   // is being pressed.  Decrease vertical (downward) velocity by amount
@@ -31,21 +36,22 @@ void Skier::Update_velocity( sf::Time elapsed_time ) {
 
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) ) {
     // turn right
-    m_velocity.x += amount;
-  }
-  if( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) ) {
-    m_velocity.x -= amount;
+    m_velocity += Util::Get_perpendicular_v2f( m_velocity, amount / 30.0f );
+  } else if( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) ) {
+    // turn left.
+    m_velocity -= Util::Get_perpendicular_v2f( m_velocity, amount / 30.0f );
   }
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) ) {
     // slow down...
-    m_velocity.y -= amount;
+    m_velocity.y -= amount / 100.0f;
+    
 
     // ... but not too much
     if( m_velocity.y < 0.0f ) {
       m_velocity.y = 0.0f;
     }
     // friction:
-    m_velocity.x /= 1.0f + amount * 10.0f;
+    m_velocity.x /= 1.0f + amount / 10.0f;
   }
   #if 0
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) ) {
@@ -54,7 +60,7 @@ void Skier::Update_velocity( sf::Time elapsed_time ) {
   #endif
 
   // gravity
-  m_velocity.y += amount / 7.0f;
+  m_velocity.y += amount / 980.6f;
 
   Normalize_velocity();
 
