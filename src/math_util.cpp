@@ -1,12 +1,13 @@
-#include <math_util.hpp>
+#include "math_util.hpp"
 
 namespace Util {
 
-sf::Vector2f Get_perpendicular_v2f( sf::Vector2f vec ) {
+sf::Vector2f Get_perpendicular_v2f( sf::Vector2f vec, float mult ) {
   sf::Vector2f  perp_vec( 0, 0 );
-  // rotate clockise by 90 degrees
-  perp_vec.x = vec.y;
-  perp_vec.y = -vec.x;
+  // Rotate clockise by 90 degrees.
+  // Apply multiplier if required.
+  perp_vec.x = vec.y * mult;
+  perp_vec.y = -vec.x * mult;
   return perp_vec;
 }
 

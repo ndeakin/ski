@@ -10,11 +10,13 @@ ifdef _DEBUG
   LDFLAGS += -g
 endif
 
+UTILOBJS = $(OBJSDIR)/math_util.o
+
 SKIOBJS = $(OBJSDIR)/ski.o $(OBJSDIR)/game.o $(OBJSDIR)/game_object_manager.o \
   $(OBJSDIR)/skier.o $(OBJSDIR)/visible_game_object.o
 
-ski : $(SKIOBJS)
-	$(CC) -o $(OBJSDIR)/ski $(LDFLAGS) $(SKIOBJS) \
+ski : $(SKIOBJS) $(UTILOBJS)
+	$(CC) -o $(OBJSDIR)/ski $(LDFLAGS) $(SKIOBJS) $(UTILOBJS) \
   -L SFML-2.1/lib -lsfml-graphics-d -lsfml-window-d -lsfml-system-d
 
 $(OBJSDIR)/%.o : $(SRCDIR)/%.cpp
