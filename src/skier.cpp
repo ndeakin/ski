@@ -6,7 +6,10 @@
 
 Skier::Skier()
   : m_velocity( 0.0f, 0.0f ),
-    m_terminal_velocity( 10.0f )
+    // TODO: consider other options for terminal, and impliment
+    // some sort of wind resisitance in the form of approaching
+    // terminal velocity.
+    m_terminal_velocity( 0.50f )
 {
   Load( "images/skiing_sprite_sheet.png" );
   // TODO: change how default sprite on sheet is determined
@@ -79,4 +82,10 @@ void Skier::Update_sprite() {
   // TODO: later on, also adjust sprite used; ex change angle
 
   Get_sprite().move( m_velocity.x, m_velocity.y );
+
+  // TODO: remove this once proper graphics are implemented;
+  // only here for testing
+  if( Get_sprite().getPosition().y > 900 ) {
+    Get_sprite().setPosition( Get_sprite().getPosition().x, 0 );
+  }
 }
