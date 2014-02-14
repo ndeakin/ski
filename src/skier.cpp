@@ -2,18 +2,19 @@
 
 #include "math_util.hpp"
 #include "skier.hpp"
+#include "skier_sprites.hpp"
 #include "visible_game_object.hpp" 
 
 Skier::Skier()
   : m_velocity( 0.0f, 0.0f ),
-    // TODO: consider other options for terminal, and impliment
+    // TODO: consider other options for terminal velocity, and impliment
     // some sort of wind resisitance in the form of approaching
     // terminal velocity.
     m_terminal_velocity( 0.50f )
 {
   Load( "images/skiing_sprite_sheet.png" );
   // TODO: change how default sprite on sheet is determined
-  Get_sprite().setTextureRect( sf::IntRect( 60, 65, 55, 50 ) );
+  Get_sprite().setTextureRect( Sprites::SKIER_45 );
 }
 
 Skier::~Skier() {}
@@ -83,6 +84,12 @@ void Skier::Update_sprite() {
 
   Get_sprite().move( m_velocity.x, m_velocity.y );
 
+  if( m_velocity.x >= 0 ) {
+    Get_sprite().setTextureRect( Sprites::SKIER_45 );
+  } else {
+    Get_sprite().setTextureRect( Sprites::SKIER_n45 );
+  }
+  
   // TODO: remove this once proper graphics are implemented;
   // only here for testing
   if( Get_sprite().getPosition().y > 900 ) {
