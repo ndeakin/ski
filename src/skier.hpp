@@ -12,6 +12,24 @@ class Skier : public Visible_game_object {
 
   void Update( sf::Time elapsed_time ); 
 
+  struct Sprite_angle {
+    static float const SLOPE_157_5 = 2.414213;
+    static float const SLOPE_172_5 = 7.595754;
+    // 180 - straight left
+    static float const SLOPE_187_5 = -7.595754;
+    static float const SLOPE_202_5 = -2.414213;
+    static float const SLOPE_207_5 = -1.303225;
+    static float const SLOPE_247_5 = -0.414213;
+    // 270 - straight down
+    static float const SLOPE_292_5 = 0.414213;
+    static float const SLOPE_322_5 = 1.303225;
+    static float const SLOPE_337_5 = 2.414213;
+    static float const SLOPE_352_5 = 7.595754;
+    // 0/360 - straight right
+    static float const SLOPE_7_5 =   -7.595754;
+    static float const SLOPE_22_5 =  -2.414213;
+  };
+
  private:
   sf::Vector2f m_velocity;
   float m_terminal_velocity;

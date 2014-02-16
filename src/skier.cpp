@@ -10,11 +10,10 @@ Skier::Skier()
     // TODO: consider other options for terminal velocity, and impliment
     // some sort of wind resisitance in the form of approaching
     // terminal velocity.
-    m_terminal_velocity( 0.50f )
+    m_terminal_velocity( 0.15f )
 {
   Load( "images/skiing_sprite_sheet.png" );
-  // TODO: change how default sprite on sheet is determined
-  Get_sprite().setTextureRect( Sprites::SKIER_45 );
+  Get_sprite().setTextureRect( Sprites::SKIER_CARVE_270 );
 }
 
 Skier::~Skier() {}
@@ -80,15 +79,70 @@ void Skier::Normalize_velocity() {
 }
 
 void Skier::Update_sprite() {
-  // TODO: later on, also adjust sprite used; ex change angle
+  // Note: This math is a little weird due to our sprite angles
+  //       being based on a typical cartesian grid whereas SFML's
+  //       image grid being a typical grid mirrored about the axis.
+  
+  if( m_velocity.y == 0 ) {
+    // TODO: handle this; just check x direction and behave accordingly.
+  } else {
 
-  Get_sprite().move( m_velocity.x, m_velocity.y );
+    float slope = m_velocity.x / m_velocity.y;
 
+    if( m_velocity.y >= 0 ) {
+      // Angle is between 180 and 360 on normal cartesion grid
+
+      if( slope >= Sprite_angle::SLOPE_352_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_0 );
+      } else if( slope >= Sprite_angle::SLOPE_337_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_345 );
+      } else if( slope >= Sprite_angle::SLOPE_322_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_330 );
+      } else if( slope >= Sprite_angle::SLOPE_292_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_315 );
+      } else if( slope <= Sprite_angle::SLOPE_247_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_225 );
+      } else if( slope <= Sprite_angle::SLOPE_207_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_210 );
+      } else if( slope <= Sprite_angle::SLOPE_202_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_195 );
+      } else if( slope <= Sprite_angle::SLOPE_187_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_180 );
+      } else {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_270 );
+      }
+
+    } else {
+      // Angle is between 0 and 180 on normal cartesian grid
+    
+      if( slope >= Sprite_angle::SLOPE_172_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_180 );
+      } else if( slope >= Sprite_angle::SLOPE_157_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_165 );
+      } else if( slope <= Sprite_angle::SLOPE_7_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_0 );
+      } else if( slope <= Sprite_angle::SLOPE_22_5 ) {
+        Get_sprite().setTextureRect( Sprites::SKIER_CARVE_15 );
+      } else {
+        // Already took care of cases where slope = 0
+        if( slope > 0.0f ) {
+          Get_sprite().setTextureRect( Sprites::SKIER_CARVE_150 );
+        } else {
+          Get_sprite().setTextureRect( Sprites::SKIER_CARVE_30 );
+        }
+      }
+    }
+  }
+
+/* old version
   if( m_velocity.x >= 0 ) {
     Get_sprite().setTextureRect( Sprites::SKIER_45 );
   } else {
     Get_sprite().setTextureRect( Sprites::SKIER_n45 );
   }
+  */
+
+  Get_sprite().move( m_velocity.x, m_velocity.y );
   
   // TODO: remove this once proper graphics are implemented;
   // only here for testing
