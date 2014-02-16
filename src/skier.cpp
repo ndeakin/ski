@@ -7,7 +7,7 @@
 
 Skier::Skier()
   : m_velocity( 0.0f, 0.0f ),
-    // TODO: consider other options for terminal velocity, and impliment
+    // TODO: verify a value for terminal velocity, and impliment
     // some sort of wind resisitance in the form of approaching
     // terminal velocity.
     m_terminal_velocity( 0.15f )

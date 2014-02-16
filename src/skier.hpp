@@ -12,6 +12,7 @@ class Skier : public Visible_game_object {
 
   void Update( sf::Time elapsed_time ); 
 
+  // TODO ndeakin: explain this.
   struct Sprite_angle {
     static float const SLOPE_157_5 = 2.414213;
     static float const SLOPE_172_5 = 7.595754;
