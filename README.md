@@ -1,12 +1,10 @@
-ski
-===
+#ski
 
 This is an arcade skiing game. You are a skier competing in the winter 
 olympics and must earn pride for your country!
 
 
-How to Build
-************
+##How to Build
 
 Replace the SFML-2.1 folder with the one your system requires.  You can get
 the SFML library at http://www.sfml-dev.org/download/sfml/2.1/.  Copy and
@@ -18,8 +16,7 @@ gcc 4.7 to compile the project as is. TODO: add build options for other
 platforms to the Makefile.
 
 
-Future Development
-******************
+##Future Development
 
 The game currently shows a single sprite that falls down a wite background.
 I think needless to say, there is work to be done. Fleshing out the graphics
