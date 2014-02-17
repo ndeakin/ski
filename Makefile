@@ -4,7 +4,7 @@ SRCDIR = .\src
 
 # compiler and compiler flags
 CC = g++
-CPPFLAGS = -c -o
+CPPFLAGS = -Wall -c -o
 LDFLAGS = -std=c++0x
 ifdef _DEBUG
   LDFLAGS += -g
