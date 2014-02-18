@@ -51,41 +51,24 @@ void Game::Game_loop() {
   sf::Time dt = sf::seconds( 1.0f / 60.0f );
   sf::Clock clock;
 
-  // For test, as commented out below
-  // std::stringstream timestream;
-
   sf::Time current_time = clock.getElapsedTime();
+  sf::Time new_time = clock.getElapsedTime();
+  sf::Time frame_time = new_time - current_time;
   while( !Is_exiting() ) {
-    sf::Time new_time = clock.getElapsedTime();
-    sf::Time frame_time = new_time - current_time;
+    new_time = clock.getElapsedTime();
+    frame_time = new_time - current_time;
     current_time = new_time;
 
     for( int i = 0; frame_time > sf::microseconds( 0 ) && i < 3 && !Is_exiting(); ++i ) {
       // delta time is the lower of frame_time and dt
       sf::Time delta_time = (( frame_time > dt ) ? dt : frame_time);
 
-      // The section below can be very useful for testing.
-      // It is left in for now since it may be needed again soon.
-      #if 0
-      std::stringstream nt, ft, dt;
-      nt << new_time.asMicroseconds();
-      ft << frame_time.asMicroseconds();
-      dt << delta_time.asMicroseconds();
-      printf( "new_time: %s\nframe_time: %s\ndelta_time: %s\n",
-              nt.str().c_str(), ft.str().c_str(), dt.str().c_str() );
-//#endif
-      timestream << delta_time.asMicroseconds();
-      printf( "delta_tim: %s\n", timestream.str().c_str() );
-      timestream.str("");
-      #endif
-
       frame_time -= delta_time;
 
       Update_game_state( current_time, delta_time );
     }
-
+    
     Render();
-
   }
 }
 
