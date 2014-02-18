@@ -2,10 +2,6 @@
 #include "skier.hpp"
 //#include "splash_screen.hpp"
 
-#include <iostream>
-#include <sstream>
-#include <string>
-
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window.hpp>
@@ -129,6 +125,10 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
         
         //Show_menu();
       }
+      break;
+    }
+    default: {
+      // shoudln't normally get here.
       break;
     }
   }
