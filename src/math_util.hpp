@@ -8,7 +8,8 @@ namespace Util {
 // Return a perpendicular vector with equal magnitude;
 // alwaus rotates the vector clockwise.
 // Optional: second argument to multiply the magnitude of the vector by
-sf::Vector2f Get_perpendicular_v2f(  sf::Vector2f vec, float mult = 1.0f );
+sf::Vector2< long double > Get_perpendicular_v2f( sf::Vector2< long double > vec,
+                                                  float mult = 1.0f );
 
 } // namespace Util
 

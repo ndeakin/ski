@@ -10,7 +10,7 @@ Skier::Skier()
     // TODO: verify a value for terminal velocity, and impliment
     // some sort of wind resisitance in the form of approaching
     // terminal velocity.
-    m_terminal_velocity( 0.15f )
+    m_terminal_velocity( 0.45f )
 {
   Load( "images/skiing_sprite_sheet.png" );
   Get_sprite().setTextureRect( Sprites::SKIER_CARVE_270 );
@@ -22,7 +22,7 @@ void Skier::Update( sf::Time elapsed_time ) {
   
   Update_velocity( elapsed_time );
 
-  Update_sprite();
+  Update_sprite( elapsed_time );
 
 }
 
@@ -31,7 +31,7 @@ void Skier::Update_velocity( sf::Time elapsed_time ) {
   // This multiplier acts as a general physics speed modifier.
   // All other similar multiplying values behave as relative intensities
   // compared to other physics effects
-  double amount = elapsed_time.asMilliseconds() / 1.0f;
+  long double amount = elapsed_time.asMicroseconds() / 10000.0f;
 
   // increase lateral velocity by 'amount' if the right or left arrow key
   // is being pressed.  Decrease vertical (downward) velocity by amount
@@ -46,7 +46,7 @@ void Skier::Update_velocity( sf::Time elapsed_time ) {
   }
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) ) {
     // slow down...
-    m_velocity.y -= amount / 100.0f;
+    m_velocity.y /= 1.0f + amount / 20.0f;
     
 
     // ... but not too much
@@ -54,7 +54,7 @@ void Skier::Update_velocity( sf::Time elapsed_time ) {
       m_velocity.y = 0.0f;
     }
     // friction:
-    m_velocity.x /= 1.0f + amount / 10.0f;
+    m_velocity.x /= 1.0f + amount / 20.0f;
   }
   #if 0
   if( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) ) {
@@ -70,7 +70,7 @@ void Skier::Update_velocity( sf::Time elapsed_time ) {
 }
 
 void Skier::Normalize_velocity() {
-  float velocity_squared = pow( m_velocity.x, 2 ) + pow( m_velocity.y, 2 ); 
+  long double velocity_squared = pow( m_velocity.x, 2 ) + pow( m_velocity.y, 2 ); 
   if( velocity_squared > pow( m_terminal_velocity, 2 ) ) {
     float v_ratio = pow( m_terminal_velocity, 2 ) / velocity_squared;
     m_velocity.x *= v_ratio;
@@ -78,13 +78,20 @@ void Skier::Normalize_velocity() {
   }
 }
 
-void Skier::Update_sprite() {
+void Skier::Update_sprite( sf::Time elapsed_time ) {
   // Note: This math is a little weird due to our sprite angles
   //       being based on a typical cartesian grid whereas SFML's
   //       image grid being a typical grid mirrored about the axis.
   
   if( m_velocity.y == 0 ) {
-    // TODO: handle this; just check x direction and behave accordingly.
+    if( m_velocity.x > 0 ) {
+      // Facing straight right
+      Get_sprite().setTextureRect( Sprites::SKIER_CARVE_0 );
+    } else if( m_velocity.x < 0 ){
+      // Facing straight left
+      Get_sprite().setTextureRect( Sprites::SKIER_CARVE_180 );
+    }
+  
   } else {
 
     float slope = m_velocity.x / m_velocity.y;
@@ -134,15 +141,10 @@ void Skier::Update_sprite() {
     }
   }
 
-/* old version
-  if( m_velocity.x >= 0 ) {
-    Get_sprite().setTextureRect( Sprites::SKIER_45 );
-  } else {
-    Get_sprite().setTextureRect( Sprites::SKIER_n45 );
-  }
-  */
-
-  Get_sprite().move( m_velocity.x, m_velocity.y );
+  float elapsed_time_ms = elapsed_time.asMicroseconds() / 1000.0f;
+  
+  Get_sprite().move( m_velocity.x * elapsed_time_ms,
+                     m_velocity.y * elapsed_time_ms );
   
   // TODO: remove this once proper graphics are implemented;
   // only here for testing

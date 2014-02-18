@@ -2,8 +2,9 @@
 
 namespace Util {
 
-sf::Vector2f Get_perpendicular_v2f( sf::Vector2f vec, float mult ) {
-  sf::Vector2f  perp_vec( 0, 0 );
+sf::Vector2< long double > Get_perpendicular_v2f( sf::Vector2< long double > vec,
+                                                  float mult ) {
+  sf::Vector2< long double >  perp_vec( 0, 0 );
   // Rotate clockise by 90 degrees.
   // Apply multiplier if required.
   perp_vec.x = vec.y * mult;

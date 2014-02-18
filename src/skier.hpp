@@ -31,13 +31,13 @@ class Skier : public Visible_game_object {
     static float const SLOPE_22_5 =  -2.414213;
   };
 
- private:
-  sf::Vector2f m_velocity;
-  float m_terminal_velocity;
+  sf::Vector2< long double > m_velocity;
+  long double  m_terminal_velocity;
+  private:
 
   // Internal functions to assist in updating
   void Update_velocity( sf::Time elapsed_time );
-  void Update_sprite();
+  void Update_sprite( sf::Time elapsed_time );
 
   void Normalize_velocity();
 };
