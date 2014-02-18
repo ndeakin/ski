@@ -24,6 +24,8 @@ Visible_game_object * Game_object_manager::Get( std::string name ) const {
         m_game_objects.find( name );
   if( results == m_game_objects.end() ) {
     return NULL;
+  } else {
+    return results->second;
   }
 }
 
