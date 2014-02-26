@@ -18,7 +18,6 @@ platforms to the Makefile.
 
 ##Future Development
 
-The game currently shows a single sprite that falls down a wite background.
-I think needless to say, there is work to be done. Fleshing out the graphics
-(ex. having the skier change sprites) and improving physics (ex. implementing
-physics) are the main priorities currently.
+The game currently shows a skier that skis down a white background. Fleshing
+out the graphics (ex. adding more skier sprites, adding gates) and improving
+physics (ex. implementing more physics) are the main priorities currently.
