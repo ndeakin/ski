@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 int main( int argc, char ** argv ) {
-  Game::Start();
+    Game::Start();
 
-  return 0;
+    return 0;
 }
