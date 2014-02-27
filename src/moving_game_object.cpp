@@ -2,7 +2,7 @@
 
 Moving_game_object::Moving_game_object()
 {
-    // TODO: implement ctor; will need to link to background somehow at this point
+    // TODO: implement ctor; will need to link to manager
 }
 
 void Moving_game_object::Update( sf::Time elapsed_time ) {
@@ -10,5 +10,7 @@ void Moving_game_object::Update( sf::Time elapsed_time ) {
 }
 
 void Moving_game_object::Move( float x, float y ) {
-    // TODO: implement Move
+    if( Visible_game_object::Is_loaded() ) {
+        
+    }
 }

@@ -8,14 +8,14 @@
 class Game_object_manager {
   public:
     Game_object_manager();
-    ~Game_object_manager();
+    virtual ~Game_object_manager();
 
     void Add( std::string name, Visible_game_object * game_object );
     void Remove( std::string name );
     Visible_game_object * Get( std::string name ) const;
 
-    void Draw_all( sf::RenderWindow & render_window );
-    void Update_all( sf::Time delta_time );
+    virtual void Draw_all( sf::RenderWindow & render_window );
+    virtual void Update_all( sf::Time delta_time );
 
     const static Game_object_manager & Get_game_object_manager();
 

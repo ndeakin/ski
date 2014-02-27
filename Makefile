@@ -13,7 +13,8 @@ endif
 UTILOBJS = $(OBJSDIR)/math_util.o
 
 SKIOBJS = $(OBJSDIR)/ski.o $(OBJSDIR)/game.o $(OBJSDIR)/game_object_manager.o \
-	$(OBJSDIR)/skier.o $(OBJSDIR)/visible_game_object.o
+	$(OBJSDIR)/skier.o $(OBJSDIR)/visible_game_object.o $(OBJSDIR)/moving_game_object.o \
+    $(OBJSDIR)/moving_game_object_manager.o
 
 ski : $(SKIOBJS) $(UTILOBJS)
 	$(CC) -o $(OBJSDIR)/ski $(LDFLAGS) $(SKIOBJS) $(UTILOBJS) \
