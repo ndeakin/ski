@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "moving_game_object_manager.hpp"
 #include "skier.hpp"
 //#include "splash_screen.hpp"
 
@@ -30,7 +31,8 @@ void Game::Start() {
     // TODO:  move g_game_object_manager.Add() into Visible_game_object dtor
     Skier * skier = new Skier();
     g_game_object_manager.Add( "Skier", skier ); 
-  
+    Moving_game_object_manager::Instance()->Set_focused_object( skier );
+
     g_game_state = Game::PLAYING;
     // Skip Splash for now
     //g_game_state = Game::SHOWING_MENU;

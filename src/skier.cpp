@@ -135,8 +135,7 @@ void Skier::Update_sprite( sf::Time elapsed_time ) {
 
     float elapsed_time_ms = elapsed_time.asMicroseconds() / 1000.0f;
   
-    Get_sprite().move( m_velocity.x * elapsed_time_ms,
-                       m_velocity.y * elapsed_time_ms );
+    Move( m_velocity.x * elapsed_time_ms, m_velocity.y * elapsed_time_ms );
   
     // TODO: remove this once proper graphics are implemented;
     // only here for testing

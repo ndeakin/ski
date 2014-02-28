@@ -3,9 +3,9 @@
 
 #include <SFML/System/Time.hpp>
 
-#include "visible_game_object.hpp"
+#include "moving_game_object.hpp"
 
-class Skier : public Visible_game_object {
+class Skier : public Moving_game_object {
   public:
     Skier();
     ~Skier();
