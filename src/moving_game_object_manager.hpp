@@ -1,8 +1,6 @@
 #ifndef _MOVING_GAME_OBJECT_MANAGER_HPP
 #define _MOVING_GAME_OBJECT_MANAGER_HPP
 
-
-
 #include "game_object_manager.hpp"
 
 class Game;
