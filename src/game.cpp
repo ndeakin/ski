@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "gate.hpp"
 #include "moving_game_object_manager.hpp"
 #include "skier.hpp"
 //#include "splash_screen.hpp"
@@ -32,6 +33,11 @@ void Game::Start() {
     Skier * skier = new Skier();
     g_game_object_manager.Add( "Skier", skier ); 
     Moving_game_object_manager::Instance()->Set_focused_object( skier );
+
+    Gate * gate1 = new Gate( Gate::RED, 400, 600 );
+    g_game_object_manager.Add( "Gate1", gate1 );
+    Gate * gate2 = new Gate( Gate::BLUE, 300, 1100 );
+    g_game_object_manager.Add( "Gate2", gate2 );
 
     g_game_state = Game::PLAYING;
     // Skip Splash for now
