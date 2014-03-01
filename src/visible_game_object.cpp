@@ -1,13 +1,18 @@
 #include <string>
 
+#include "game.hpp"
 #include "visible_game_object.hpp"
 
+Visible_game_object::Visible_game_object( char const * name )
+    : m_is_loaded( false ),
+      m_name( name )
+{
+    Game::Get_game_object_manager().Add( m_name, this );
+}
 
-Visible_game_object::Visible_game_object()
-    : m_is_loaded( false )
-{}
-
-Visible_game_object::~Visible_game_object() {}
+Visible_game_object::~Visible_game_object() {
+    Game::Get_game_object_manager().Remove( m_name );
+}
 
 void Visible_game_object::Load( std::string filename ) {
     if( m_texture.loadFromFile( filename ) == false ) {

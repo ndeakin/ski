@@ -7,7 +7,7 @@
 
 class Skier : public Moving_game_object {
   public:
-    Skier();
+    Skier( char const * name );
     ~Skier();
 
     void Update( sf::Time elapsed_time ); 

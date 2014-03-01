@@ -29,15 +29,11 @@ void Game::Start() {
                           "Ski!",
                           sf::Style::Fullscreen );
  
-    // TODO:  move g_game_object_manager.Add() into Visible_game_object dtor
-    Skier * skier = new Skier();
-    g_game_object_manager.Add( "Skier", skier ); 
+    Skier * skier = new Skier( "Skier" );
     Moving_game_object_manager::Instance()->Set_focused_object( skier );
 
-    Gate * gate1 = new Gate( Gate::RED, 400, 600 );
-    g_game_object_manager.Add( "Gate1", gate1 );
-    Gate * gate2 = new Gate( Gate::BLUE, 300, 1100 );
-    g_game_object_manager.Add( "Gate2", gate2 );
+    Gate * gate1 = new Gate( "Gate1", Gate::RED, 400, 600 );
+    Gate * gate2 = new Gate( "Gate2", Gate::BLUE, 300, 1100 );
 
     g_game_state = Game::PLAYING;
     // Skip Splash for now
@@ -45,9 +41,9 @@ void Game::Start() {
     //g_game_state = Game::SHOWING_SPLASH; 
     Game_loop();
   
-    // TODO: same as above line, but for Remove() and ctor
-    g_game_object_manager.Remove( "Skier" );
     delete skier;
+    delete gate1;
+    delete gate2;
     g_main_window.close();
 }
 
@@ -80,7 +76,7 @@ sf::RenderWindow & Game::Get_window() {
     return g_main_window;
 }
 
-const Game_object_manager & Game::Get_game_object_manager() {
+Game_object_manager & Game::Get_game_object_manager() {
     return g_game_object_manager;
 }
 

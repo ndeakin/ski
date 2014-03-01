@@ -18,7 +18,7 @@ class Game {
     static sf::RenderWindow & Get_window();
   
     const static sf::Keyboard::Key & Get_input();
-    const static Game_object_manager & Get_game_object_manager();
+    static Game_object_manager & Get_game_object_manager();
     const static Game_state Get_game_state();
 
     const static int SCREEN_WIDTH =  1600;

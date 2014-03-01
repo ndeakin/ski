@@ -12,7 +12,7 @@ class Gate : public Moving_game_object {
         BLUE
     };
 
-    Gate( Colour color, float x, float y );
+    Gate( char const * name, Colour color, float x, float y );
     ~Gate();
 
     void Update( sf::Time elapsed_time );

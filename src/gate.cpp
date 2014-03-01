@@ -1,7 +1,9 @@
 #include "gate.hpp"
 #include "gate_sprites.hpp"
 
-Gate::Gate( Colour colour, float x, float y ) {
+Gate::Gate( char const * name, Colour colour, float x, float y )
+    : Moving_game_object( name )
+{
     Load( "images/skiing_sprite_sheet.png" );
     switch( colour ) {
         case RED:

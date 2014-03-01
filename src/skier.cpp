@@ -5,8 +5,9 @@
 #include "skier_sprites.hpp"
 #include "visible_game_object.hpp" 
 
-Skier::Skier()
-    : m_velocity( 0.0f, 0.0f ),
+Skier::Skier( char const * name )
+    : Moving_game_object( name ),
+      m_velocity( 0.0f, 0.0f ),
       // TODO: verify a value for terminal velocity, and impliment
       // some sort of wind resisitance in the form of approaching
       // terminal velocity.

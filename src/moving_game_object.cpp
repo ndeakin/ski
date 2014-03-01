@@ -1,8 +1,9 @@
 #include "moving_game_object.hpp"
 #include "moving_game_object_manager.hpp"
 
-Moving_game_object::Moving_game_object()
-    : m_manager( Moving_game_object_manager::Instance() )
+Moving_game_object::Moving_game_object( char const * name )
+    : Visible_game_object( name ),
+      m_manager( Moving_game_object_manager::Instance() )
 {
     m_manager->Register_object( this );
 }

@@ -7,7 +7,7 @@
 
 class Visible_game_object {
   public:
-    Visible_game_object();
+    Visible_game_object( char const * name );
     virtual ~Visible_game_object();
 
     virtual void Load( std::string filename );
@@ -28,10 +28,11 @@ class Visible_game_object {
     sf::Sprite & Get_sprite();
 
   private:
-    sf::Sprite  m_sprite;
-    sf::Texture m_texture;
-    std::string m_filename;
-    bool        m_is_loaded;
+    sf::Sprite      m_sprite;
+    sf::Texture     m_texture;
+    std::string     m_filename;
+    bool            m_is_loaded;
+    char const *    m_name;
 };
 
 #endif // _VISIBLE_GAME_OBJECT_HPP

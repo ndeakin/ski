@@ -10,7 +10,7 @@ class Moving_game_object : public Visible_game_object {
     Moving_game_object_manager * m_manager;
 
   public:
-    Moving_game_object();
+    Moving_game_object( char const * );
     ~Moving_game_object();
 
     // Called with the elapsed time since the previous call.
