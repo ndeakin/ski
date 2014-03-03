@@ -16,6 +16,7 @@ class Moving_game_object_manager : public Game_object_manager {
     friend class Moving_game_object;
     static Moving_game_object_manager * Instance();
     void Register_object( Moving_game_object * object );
+    void Deregister_object( Moving_game_object * object );
     void Handle_object_move( Moving_game_object * object, float x, float y );
 
   public:

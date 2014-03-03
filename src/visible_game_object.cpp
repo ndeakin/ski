@@ -3,11 +3,11 @@
 #include "game.hpp"
 #include "visible_game_object.hpp"
 
-Visible_game_object::Visible_game_object( char const * name )
+Visible_game_object::Visible_game_object( std::string name )
     : m_is_loaded( false ),
       m_name( name )
 {
-    Game::Get_game_object_manager().Add( m_name, this );
+    Game::Get_game_object_manager().Add( m_name.c_str(), this );
 }
 
 Visible_game_object::~Visible_game_object() {

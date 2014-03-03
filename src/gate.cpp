@@ -1,7 +1,7 @@
 #include "gate.hpp"
 #include "gate_sprites.hpp"
 
-Gate::Gate( char const * name, Colour colour, float x, float y )
+Gate::Gate( std::string name, Colour colour, float x, float y )
     : Moving_game_object( name )
 {
     Load( "images/skiing_sprite_sheet.png" );

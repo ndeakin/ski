@@ -20,6 +20,18 @@ void Moving_game_object_manager::Register_object( Moving_game_object * object ) 
     m_objects.push_back( object );
 }
 
+void Moving_game_object_manager::Deregister_object( Moving_game_object * object ) {
+    for( std::vector< Moving_game_object * >::iterator object_it = m_objects.begin();
+         object_it != m_objects.end();
+         ++object_it )
+    {
+        if( object == *object_it ) {
+            m_objects.erase( object_it );
+            break;
+        }
+    }
+}
+
 void Moving_game_object_manager::Set_focused_object(
                                     Moving_game_object * focus_object ) {
     m_focused_object = focus_object;
@@ -43,7 +55,7 @@ void Moving_game_object_manager::Handle_object_move( Moving_game_object * object
             if( *it != object ) {
                 // TODO: could also focus in x direction in the future?
                 //       see what we like.
-                (*it)->Visible_game_object::Move( 0, -y );
+                (*it)->Move( 0, -y, false );
             }
         }
     }

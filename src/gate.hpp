@@ -12,10 +12,10 @@ class Gate : public Moving_game_object {
         BLUE
     };
 
-    Gate( char const * name, Colour color, float x, float y );
-    ~Gate();
+    Gate( std::string name, Colour color, float x, float y );
+    virtual ~Gate();
 
-    void Update( sf::Time elapsed_time );
+    virtual void Update( sf::Time elapsed_time );
 };
 
 #endif // !_GATE_HPP
