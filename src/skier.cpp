@@ -11,7 +11,7 @@ Skier::Skier( char const * name )
       // TODO: verify a value for terminal velocity, and impliment
       // some sort of wind resisitance in the form of approaching
       // terminal velocity.
-      m_terminal_velocity( 0.45f )
+      m_terminal_velocity( 0.55f )
 {
     Load( "images/skiing_sprite_sheet.png" );
     Get_sprite().setTextureRect( Sprites::SKIER_CARVE_270 );
@@ -60,7 +60,7 @@ void Skier::Update_velocity( sf::Time elapsed_time ) {
     #endif
 
     // gravity
-    m_velocity.y += amount / 980.6f;
+    m_velocity.y += amount * 2 / 980.6f;
 
     Normalize_velocity();
 }

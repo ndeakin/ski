@@ -45,9 +45,7 @@ void Moving_game_object_manager::Handle_object_move( Moving_game_object * object
                                                      float x,
                                                      float y ) {
     if( object == m_focused_object ) {
-        if( object->Get_position().y > 450 ) {
-            object->Set_position( object->Get_position().x, 450 );
-        }
+        object->Set_position( object->Get_position().x, 450 );
         for( std::vector< Moving_game_object * >::iterator it = m_objects.begin();
              it != m_objects.end();
              ++it )

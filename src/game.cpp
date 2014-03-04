@@ -31,6 +31,7 @@ void Game::Start() {
                           sf::Style::Fullscreen );
  
     Skier * skier = new Skier( "Skier" );
+    skier->Set_position( 800, 450 );
     Moving_game_object_manager::Instance()->Set_focused_object( skier );
 
     Race_course * course = new Race_course();
