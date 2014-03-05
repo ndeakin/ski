@@ -11,8 +11,6 @@ Race_course::Race_course()
       m_gate_separation_y( 400 ),
       m_gate_amplitude_x( 100 )
 {
-    // Y-start value is increased by 450; this 450 is the amount down
-    // the screen that the skier starts.
     m_gates.push_back( new Gate( "Course_gate_1", Gate::RED,
                        m_horizontal_course_center + 50, Game::SKIER_START_Y + 400 ) );
     m_gates.push_back( new Gate( "Course_gate_2", Gate::BLUE,
