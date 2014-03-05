@@ -14,15 +14,19 @@ class Game {
         UNINITIALIZED, SHOWING_SPLASH, SHOWING_MENU, PLAYING, PAUSED, EXITING
     };
 
+    static const int SCREEN_WIDTH =  1600;
+    static const int SCREEN_HEIGHT = 900;
+
+    // currently in the middle of the screen
+    static const unsigned SKIER_START_X = 800;
+    static const unsigned SKIER_START_Y = 200;
+
     static void Start();
     static sf::RenderWindow & Get_window();
   
     const static sf::Keyboard::Key & Get_input();
     static Game_object_manager & Get_game_object_manager();
     const static Game_state Get_game_state();
-
-    const static int SCREEN_WIDTH =  1600;
-    const static int SCREEN_HEIGHT = 900;
 
   private:
     static bool Is_exiting();

@@ -9,6 +9,7 @@ class Moving_game_object;
 class Moving_game_object_manager : public Game_object_manager {
   private:
     Moving_game_object *    m_focused_object;
+    unsigned int            m_focused_object_y;
     std::vector< Moving_game_object * > m_objects;
   
   protected:
@@ -25,6 +26,7 @@ class Moving_game_object_manager : public Game_object_manager {
 
     // Get and set the object that will be focused;
     void Set_focused_object( Moving_game_object * focus_object );
+    void Set_focused_object_y( unsigned int focused_object_y );
     Moving_game_object const *  Get_focused_object() const;
 };
 
