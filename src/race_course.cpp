@@ -1,3 +1,4 @@
+#include "colour.hpp"
 #include "game.hpp"
 #include "race_course.hpp"
 
@@ -11,14 +12,18 @@ Race_course::Race_course()
       m_gate_separation_y( 400 ),
       m_gate_amplitude_x( 100 )
 {
-    m_gates.push_back( new Gate( "Course_gate_1", Gate::RED,
-                       m_horizontal_course_center + 50, Game::SKIER_START_Y + 400 ) );
-    m_gates.push_back( new Gate( "Course_gate_2", Gate::BLUE,
-                       m_horizontal_course_center - 50, Game::SKIER_START_Y + 800 ) );
-    m_gates.push_back( new Gate( "Course_gate_3", Gate::RED,
-                       m_horizontal_course_center + 100, Game::SKIER_START_Y + 1200 ) );
-    m_gates.push_back( new Gate( "Course_gate_4", Gate::BLUE,
-                       m_horizontal_course_center - 100, Game::SKIER_START_Y + 1600 ) );
+    m_gates.push_back( new Gate( "Course_gate_1", Colour::RED,
+                       m_horizontal_course_center + 50, Game::SKIER_START_Y + 400,
+                       true ) );
+    m_gates.push_back( new Gate( "Course_gate_2", Colour::BLUE,
+                       m_horizontal_course_center - 50, Game::SKIER_START_Y + 800,
+                       false ) );
+    m_gates.push_back( new Gate( "Course_gate_3", Colour::RED,
+                       m_horizontal_course_center + 100, Game::SKIER_START_Y + 1200,
+                       true ) );
+    m_gates.push_back( new Gate( "Course_gate_4", Colour::BLUE,
+                       m_horizontal_course_center - 100, Game::SKIER_START_Y + 1600,
+                       false ) );
     m_num_gates += 4;
 }
 
@@ -40,10 +45,13 @@ void Race_course::Update( sf::Time elapsed_time ) {
         char name_string[16];
         snprintf( name_string, 16, "Course_gate_%i", ++m_num_gates );
         m_gates.push_back( new Gate( name_string,
-                                     m_num_gates % 2 == 0 ? Gate::BLUE : Gate::RED,
+                                     m_num_gates % 2 == 0 ? Colour::BLUE : Colour::RED,
                                      m_horizontal_course_center + 100 -
                                      ( m_num_gates % 2 == 0 ? 200 : 0 ),
-                                     NEW_GATE_SPAWN_Y )  );
+                                     NEW_GATE_SPAWN_Y,
+                                     // if odd number,
+                                     // then x_coord_is_left_side is true
+                                     m_num_gates % 2 != 0 ? true : false )  );
         delete *m_gates.begin();
         m_gates.erase( m_gates.begin() );
     }
