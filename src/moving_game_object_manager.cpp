@@ -51,8 +51,6 @@ void Moving_game_object_manager::Handle_object_move( Moving_game_object * object
              ++it )
         {
             if( *it != object ) {
-                // TODO: could also focus in x direction in the future?
-                //       see what we like.
                 (*it)->Move( 0, -y, false );
             }
         }
