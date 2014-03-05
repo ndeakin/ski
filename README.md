@@ -3,6 +3,7 @@
 This is an arcade skiing game. You are a skier competing in the winter 
 olympics and must earn pride for your country!
 
+![ski](ski-sample-1.png)
 
 ##How to Build
 
@@ -19,5 +20,5 @@ platforms to the Makefile.
 ##Future Development
 
 The game currently shows a skier that skis down a white background. Fleshing
-out the graphics (ex. adding more skier sprites, adding gates) and improving
-physics (ex. implementing more physics) are the main priorities currently.
+out the graphics (ex. adding more skier and gate sprites) and improving physics
+(ex. implementing more physics) are the main priorities currently.
