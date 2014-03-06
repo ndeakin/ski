@@ -7,7 +7,7 @@ Lone_gate::Lone_gate( std::string name, Colour::Colour colour, float x, float y,
       m_colour( colour ),
       m_x_coord_is_left_side( x_coord_is_left_side )
 {
-    Load( "images/skiing_sprite_sheet.png" );
+    Load();
     switch( colour ) {
         case Colour::RED:
             Get_sprite().setTextureRect( Sprites::GATE_RED_NORMAL );

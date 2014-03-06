@@ -13,7 +13,7 @@ Skier::Skier( char const * name )
       // terminal velocity.
       m_terminal_velocity( 0.55f )
 {
-    Load( "images/skiing_sprite_sheet.png" );
+    Load();
     Get_sprite().setTextureRect( Sprites::SKIER_CARVE_270 );
 }
 

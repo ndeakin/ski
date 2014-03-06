@@ -1,6 +1,7 @@
 #include <string>
 
 #include "game.hpp"
+//#include "sprites.hpp"
 #include "visible_game_object.hpp"
 
 Visible_game_object::Visible_game_object( std::string name )
@@ -12,15 +13,28 @@ Visible_game_object::Visible_game_object( std::string name )
 
 Visible_game_object::~Visible_game_object() {
     Game::Get_game_object_manager().Remove( m_name );
+    if( m_filename == "" ) {
+        //delete m_texture;
+    }
 }
 
+// Default filename is "", which will load from the Ski_sprite_sheet instead
 void Visible_game_object::Load( std::string filename ) {
-    if( m_texture.loadFromFile( filename ) == false ) {
-        m_filename = "";
-        m_is_loaded = false;
+    if( filename != "" ) {
+        // TODO: handle allocation failure
+        m_texture = new sf::Texture();
+        if( m_texture->loadFromFile( filename ) == false ) {
+            m_filename = "";
+            m_is_loaded = false;
+        } else {
+            m_filename = filename;
+            m_sprite.setTexture( *m_texture, true );
+            m_is_loaded = true;
+        }
     } else {
-        m_filename = filename;
-        m_sprite.setTexture( m_texture );
+        m_filename = "";
+        m_texture = &Game::g_sprite_sheet;
+        m_sprite.setTexture( *m_texture );
         m_is_loaded = true;
     }
 }
@@ -63,15 +77,15 @@ bool Visible_game_object::Is_loaded() const {
 }
 
 float Visible_game_object::Get_height() const {
-    return m_texture.getSize().y;
+    return m_texture->getSize().y;
 }
 
 float Visible_game_object::Get_width() const {
-    return m_texture.getSize().x;
+    return m_texture->getSize().x;
 }
 
 sf::Rect< float > Visible_game_object::Get_bounding_rect() const {
-    sf::Vector2u size = m_texture.getSize();
+    sf::Vector2u size = m_texture->getSize();
     sf::Vector2f position = m_sprite.getPosition();
 
     return sf::Rect< float >(

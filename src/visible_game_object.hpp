@@ -10,7 +10,7 @@ class Visible_game_object {
     Visible_game_object( std::string name );
     virtual ~Visible_game_object();
 
-    virtual void Load( std::string filename );
+    virtual void Load( std::string filename = "" );
     virtual void Draw( sf::RenderWindow & window );
     virtual void Update( sf::Time elapsed_time );
 
@@ -30,11 +30,11 @@ class Visible_game_object {
     sf::Sprite & Get_sprite();
 
   private:
-    sf::Sprite  m_sprite;
-    sf::Texture m_texture;
-    std::string m_filename;
-    bool        m_is_loaded;
-    std::string m_name;
+    sf::Sprite      m_sprite;
+    sf::Texture *   m_texture;
+    std::string     m_filename;
+    bool            m_is_loaded;
+    std::string     m_name;
 };
 
 #endif // _VISIBLE_GAME_OBJECT_HPP

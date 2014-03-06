@@ -4,6 +4,7 @@
 #include "race_course.hpp"
 #include "skier.hpp"
 //#include "splash_screen.hpp"
+//#include "sprites.hpp"
 
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
@@ -14,6 +15,7 @@ Game::Game_state    Game::g_game_state = UNINITIALIZED;
 sf::RenderWindow    Game::g_main_window;
 Game_object_manager Game::g_game_object_manager;
 bool                Game::g_is_multiplayer = false;
+sf::Texture         Game::g_sprite_sheet;
 
 // TODO: create Is_multiplayer() and Set_multiplayer( bool ) functions
 
@@ -29,7 +31,10 @@ void Game::Start() {
     g_main_window.create( sf::VideoMode::getFullscreenModes()[0],
                           "Ski!",
                           sf::Style::Fullscreen );
- 
+
+    // TODO: put this in a function, or even better in namespace Sprites
+    g_sprite_sheet.loadFromFile( "images/skiing_sprite_sheet.png" );
+
     Skier * skier = new Skier( "Skier" );
     skier->Set_position( SKIER_START_X, SKIER_START_Y );
     Moving_game_object_manager::Instance()->Set_focused_object( skier );
