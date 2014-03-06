@@ -19,6 +19,7 @@ platforms to the Makefile.
 
 ##Future Development
 
-The game currently shows a skier that skis down a white background. Fleshing
+The game currently shows a skier that can be controlled as they ski down a
+white background with gates (going through the gates is optional). Fleshing
 out the graphics (ex. adding more skier and gate sprites) and improving physics
 (ex. implementing more physics) are the main priorities currently.
