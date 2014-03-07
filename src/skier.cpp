@@ -101,14 +101,14 @@ void Skier::Update_sprite( sf::Time elapsed_time ) {
                 Get_sprite().setTextureRect( Sprites::SKIER_CARVE_330 );
             } else if( slope >= Sprite_angle::SLOPE_292_5 ) {
                 Get_sprite().setTextureRect( Sprites::SKIER_CARVE_315 );
-            } else if( slope <= Sprite_angle::SLOPE_247_5 ) {
-                Get_sprite().setTextureRect( Sprites::SKIER_CARVE_225 );
-            } else if( slope <= Sprite_angle::SLOPE_207_5 ) {
-                Get_sprite().setTextureRect( Sprites::SKIER_CARVE_210 );
-            } else if( slope <= Sprite_angle::SLOPE_202_5 ) {
-                Get_sprite().setTextureRect( Sprites::SKIER_CARVE_195 );
             } else if( slope <= Sprite_angle::SLOPE_187_5 ) {
                 Get_sprite().setTextureRect( Sprites::SKIER_CARVE_180 );
+            } else if( slope <= Sprite_angle::SLOPE_202_5 ) {
+                Get_sprite().setTextureRect( Sprites::SKIER_CARVE_195 );
+            } else if( slope <= Sprite_angle::SLOPE_217_5 ) {
+                Get_sprite().setTextureRect( Sprites::SKIER_CARVE_210 );
+            } else if( slope <= Sprite_angle::SLOPE_247_5 ) {
+                Get_sprite().setTextureRect( Sprites::SKIER_CARVE_225 );
             } else {
                 Get_sprite().setTextureRect( Sprites::SKIER_CARVE_270 );
             }

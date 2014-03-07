@@ -19,7 +19,7 @@ class Skier : public Moving_game_object {
         // 180 - straight left
         static float const SLOPE_187_5 = -7.595754;
         static float const SLOPE_202_5 = -2.414213;
-        static float const SLOPE_207_5 = -1.303225;
+        static float const SLOPE_217_5 = -1.303225;
         static float const SLOPE_247_5 = -0.414213;
         // 270 - straight down
         static float const SLOPE_292_5 = 0.414213;
