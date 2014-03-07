@@ -74,10 +74,55 @@ void Skier::Normalize_velocity() {
     }
 }
 
+// Each of the Sprite_angle enum values is equal to:
+//          tan( velocity.x / velocity.y )
+// for velocity corresponding to a vector with the angle in the
+// Sprite_angle's name.
+//  Ex. If placed with its tail at the origin of a typical cartesian grid,
+//      the head of the vector that correspond to SLOPE_7_5 would be just
+//      above the positive X-axis. The  head of SLOPE_187_5 would be just
+//      below the negative X-axis.
+//
+// The exact values of the enum are different from what one might expect
+// since x and y values in SFML correspond to an offset from the top left
+// corner of the object or image in question. Therefore, the actual
+// cartesian grid overlaid on an image in 'SFML space' is that of a typical
+// cartesian grid mirrored about its X-axis:
+//
+//                  negative y
+//
+//                      |
+//                      |
+//                      |
+//    negative x  ------+------  positive x
+//                      |
+//                      |
+//                      |
+//
+//                  positive y
+//
+struct Skier::Sprite_angle {
+    static float const SLOPE_157_5 = 2.414213;
+    static float const SLOPE_172_5 = 7.595754;
+    // 180 - straight left
+    static float const SLOPE_187_5 = -7.595754;
+    static float const SLOPE_202_5 = -2.414213;
+    static float const SLOPE_217_5 = -1.303225;
+    static float const SLOPE_247_5 = -0.414213;
+    // 270 - straight down
+    static float const SLOPE_292_5 = 0.414213;
+    static float const SLOPE_322_5 = 1.303225;
+    static float const SLOPE_337_5 = 2.414213;
+    static float const SLOPE_352_5 = 7.595754;
+    // 0/360 - straight right
+    static float const SLOPE_7_5 =   -7.595754;
+    static float const SLOPE_22_5 =  -2.414213;
+};
+
 void Skier::Update_sprite( sf::Time elapsed_time ) {
     // Note: This math is a little weird due to our sprite angles
     //       being based on a typical cartesian grid whereas SFML's
-    //       image grid being a typical grid mirrored about the axis.
+    //       image grid being a typical grid mirrored about the X-axis.
   
     if( m_velocity.y == 0 ) {
         if( m_velocity.x > 0 ) {
