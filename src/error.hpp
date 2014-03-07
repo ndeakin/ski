@@ -7,8 +7,8 @@ enum Error_code {
     //         -> The less significant 'XX' identifies that specific error
 
     // 0x?01XX - Graphics related errors
-    FE_SPRITE_SHEET_LOAD_FAILURE = 0x0001,
-    EC_VISIBLE_GAME_OBJECT_TEXTURE_LOAD_FAILURE         = 0x10001,
+    FE_SPRITE_SHEET_LOAD_FAILURE                        = 0x00101,
+    EC_VISIBLE_GAME_OBJECT_TEXTURE_LOAD_FAILURE         = 0x10101,
 };
 
 #endif // !_ERROR_HPP
