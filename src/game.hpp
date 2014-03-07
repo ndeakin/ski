@@ -28,8 +28,6 @@ class Game {
     static Game_object_manager & Get_game_object_manager();
     const static Game_state Get_game_state();
 
-    static sf::Texture          g_sprite_sheet;
-
   private:
     static bool Is_exiting();
     static void Game_loop();

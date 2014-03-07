@@ -33,6 +33,7 @@ class Visible_game_object {
     sf::Sprite      m_sprite;
     sf::Texture *   m_texture;
     std::string     m_filename;
+    bool            m_is_responsible_for_texture;
     bool            m_is_loaded;
     std::string     m_name;
 };

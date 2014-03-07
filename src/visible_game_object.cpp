@@ -1,11 +1,14 @@
 #include <string>
 
+#include "error.hpp"
 #include "game.hpp"
-//#include "sprites.hpp"
+#include "sprites.hpp"
 #include "visible_game_object.hpp"
 
 Visible_game_object::Visible_game_object( std::string name )
-    : m_is_loaded( false ),
+    : m_filename( "" ),
+      m_is_responsible_for_texture( false ),
+      m_is_loaded( false ),
       m_name( name )
 {
     Game::Get_game_object_manager().Add( m_name.c_str(), this );
@@ -13,16 +16,25 @@ Visible_game_object::Visible_game_object( std::string name )
 
 Visible_game_object::~Visible_game_object() {
     Game::Get_game_object_manager().Remove( m_name );
-    if( m_filename == "" ) {
-        //delete m_texture;
+    if( m_is_responsible_for_texture ) {
+        delete m_texture;
     }
 }
 
 // Default filename is "", which will load from the Ski_sprite_sheet instead
 void Visible_game_object::Load( std::string filename ) {
     if( filename != "" ) {
-        // TODO: handle allocation failure
         m_texture = new sf::Texture();
+        if( m_texture == NULL ) {
+            fprintf( stderr, "Error: failed to allocate texture for "
+                             "Visible_game_object '%s', error code: 0x%06X.\n",
+                             m_name.c_str(),
+                             EC_VISIBLE_GAME_OBJECT_TEXTURE_LOAD_FAILURE );
+            return;
+        }
+
+        m_is_responsible_for_texture = true;
+
         if( m_texture->loadFromFile( filename ) == false ) {
             m_filename = "";
             m_is_loaded = false;
@@ -33,8 +45,7 @@ void Visible_game_object::Load( std::string filename ) {
         }
     } else {
         m_filename = "";
-        m_texture = &Game::g_sprite_sheet;
-        m_sprite.setTexture( *m_texture );
+        m_sprite.setTexture( Sprites::Ski_sprite_sheet );
         m_is_loaded = true;
     }
 }
