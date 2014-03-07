@@ -11,8 +11,8 @@ namespace Sprites {
     //
     //  All argument values to the IntRect constructor are in pixels.
 
-    sf::IntRect GATE_RED_NORMAL(  6,    1073,   33,   50 );
-    sf::IntRect GATE_BLUE_NORMAL( 246,  1073,   33,   50 );
+    const sf::IntRect GATE_RED_NORMAL(  6,    1073,   33,   50 );
+    const sf::IntRect GATE_BLUE_NORMAL( 246,  1073,   33,   50 );
 
 } // namespace Sprites
 
