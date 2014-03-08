@@ -1,3 +1,4 @@
+#include "error.hpp"
 #include "game.hpp"
 #include "gate.hpp"
 #include "moving_game_object_manager.hpp"
@@ -157,10 +158,6 @@ bool Game::Show_menu() {
     } else {
         return false;
     }
-}
-
-void Game::Show_menu() {
-    // TODO: implement this (Game::Show_menu)
 }
 
 void Game::Create_players() {
