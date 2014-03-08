@@ -134,6 +134,10 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
         }
         default: {
             // shoudln't normally get here.
+            fprintf( stderr, "Error: Game is in an unknown game state, "
+                             "error code: 0x%05X. Now exiting.\n",
+                             FE_GAME_IN_UNKNOWN_GAME_STATE );
+            exit( FE_GAME_IN_UNKNOWN_GAME_STATE );
             break;
         }
     }
