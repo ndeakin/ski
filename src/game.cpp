@@ -101,18 +101,16 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
 
     switch( g_game_state ) {
         case Game::SHOWING_MENU: {
-            // TODO: This part jsut below doesn't make sense.
-            // reurns true when playing
+            // TODO: See note at Game::Show_menu defintion
             if( Show_menu() ) {
-                // TODO: OK, a little more sense, Create_players does not do anything
-                //       (yet). We are creating the players in Game::Start(), before this.
-        
-                // Create_players();
+                // TODO: Implement Create_players; currently does not do anything
+                Create_players();
             }
             break;
         }
         case Game::SHOWING_SPLASH: {
-            // TODO: part of splash screen fix
+            // TODO: Show_splash_screen doesn't actually do anything currently,
+            //       other than change the game state to the menu
             Show_splash_screen();
             break;
         }
@@ -128,9 +126,8 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
             if( sf::Keyboard::isKeyPressed( sf::Keyboard::Escape ) ) {
                 g_game_state = EXITING;
 
-                // TODO: find way to stop objects from moving while game is paused
-        
-                // Show_menu();
+                // TODO: should open a menu instead of exiting
+                // NOTE: make sure to stop objects from moving while game is paused
             }
             break;
         }
@@ -147,11 +144,13 @@ void Game::Render() {
 }
 
 void Game::Show_splash_screen() {
+    // TODO: implement class Splash_screen
     // Splash_screen splash_screen;
     // splash_screen.Show( g_main_window );
     g_game_state = Game::SHOWING_MENU;
 }
 
+// TODO: Fix the implementation of Show_menu (returns bool? not very intuitive).
 bool Game::Show_menu() {
     if( g_game_state == Game::SHOWING_MENU ) {
         return true;
@@ -160,7 +159,10 @@ bool Game::Show_menu() {
     }
 }
 
-// TODO: Not currently used; need to impliment this function
+void Game::Show_menu() {
+    // TODO: implement this (Game::Show_menu)
+}
+
 void Game::Create_players() {
-    
+    // TODO: implement this (Game::Create_players)
 }
