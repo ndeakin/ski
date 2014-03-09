@@ -26,10 +26,7 @@ void Visible_game_object::Load( std::string filename ) {
     if( filename != "" ) {
         m_texture = new sf::Texture();
         if( m_texture == NULL ) {
-            fprintf( stderr, "Error: failed to allocate texture for "
-                             "Visible_game_object '%s', error code: 0x%05X.\n",
-                             m_name.c_str(),
-                             EC_VISIBLE_GAME_OBJECT_TEXTURE_LOAD_FAILURE );
+            Assert( false, EC_VISIBLE_GAME_OBJECT_TEXTURE_LOAD_FAILURE );
             return;
         }
 
