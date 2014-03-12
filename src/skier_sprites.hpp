@@ -23,7 +23,7 @@ namespace Sprites {
     const sf::IntRect SKIER_CARVE_210(  62,   119,  49,   42 );
     const sf::IntRect SKIER_CARVE_225(  18,   120,  40,   42 );
     const sf::IntRect SKIER_CARVE_270(  502,  70,   42,   43 );
-    const sf::IntRect SKIER_CARVE_315(  455,  72,   37,   41 );
+    const sf::IntRect SKIER_CARVE_315(  455,  72,   40,   41 );
     const sf::IntRect SKIER_CARVE_330(  398,  71,   49,   42 );
     const sf::IntRect SKIER_CARVE_345(  343,  73,   51,   41 );
     const sf::IntRect SKIER_CARVE_0(    279,  76,   52,   37 );
