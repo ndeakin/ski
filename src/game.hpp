@@ -8,6 +8,8 @@
 #include "game_object_manager.hpp"
 #include "skier.hpp"
 
+class Race_course;
+
 class Game {
   public:
     enum Game_state {
@@ -37,12 +39,16 @@ class Game {
     static void Show_splash_screen();
     static bool Show_menu();
 
-    static void Create_players();
+    static void Load_game_objects();
+    static void Clean_up_game_objects();
 
     static Game_state           g_game_state;
     static sf::RenderWindow     g_main_window;
     static Game_object_manager  g_game_object_manager;
     static bool                 g_is_multiplayer;
+
+    static Skier *              g_skier;
+    static Race_course *        g_race_course;
 };
 
 #endif // _GAME_HPP

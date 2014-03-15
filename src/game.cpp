@@ -17,6 +17,9 @@ sf::RenderWindow    Game::g_main_window;
 Game_object_manager Game::g_game_object_manager;
 bool                Game::g_is_multiplayer = false;
 
+Skier *             Game::g_skier = NULL;
+Race_course *       Game::g_race_course = NULL;
+
 // TODO: create Is_multiplayer() and Set_multiplayer( bool ) functions
 
 void Game::Start() {
@@ -24,30 +27,21 @@ void Game::Start() {
         return;
     }
 
-    // Create game objjects
-  
     // The 0th entry of the array-like object returned by getFullscreenModes()
     // is always the video mode with the best resolution and colour depth.
     g_main_window.create( sf::VideoMode::getFullscreenModes()[0],
                           "Ski!",
                           sf::Style::Fullscreen );
 
-    Sprites::Initialize_sprite_sheet();
+    Load_game_objects();
 
-    Skier * skier = new Skier( "Skier" );
-    skier->Set_position( SKIER_START_X, SKIER_START_Y );
-    Moving_game_object_manager::Instance()->Set_focused_object( skier );
-    Moving_game_object_manager::Instance()->Set_focused_object_y( SKIER_START_Y );
-
-    Race_course * course = new Race_course();
     g_game_state = Game::PLAYING;
     // Skip Splash for now
     //g_game_state = Game::SHOWING_MENU;
     //g_game_state = Game::SHOWING_SPLASH; 
     Game_loop();
   
-    delete skier;
-    delete course;
+    Clean_up_game_objects();
     g_main_window.close();
 }
 
@@ -104,8 +98,7 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
         case Game::SHOWING_MENU: {
             // TODO: See note at Game::Show_menu defintion
             if( Show_menu() ) {
-                // TODO: Implement Create_players; currently does not do anything
-                Create_players();
+                // TODO: move Load_game_objects() call to here once menu is used
             }
             break;
         }
@@ -161,6 +154,18 @@ bool Game::Show_menu() {
     }
 }
 
-void Game::Create_players() {
-    // TODO: implement this (Game::Create_players)
+void Game::Load_game_objects() {
+    Sprites::Initialize_sprite_sheet();
+
+    g_skier = new Skier( "Skier" );
+    g_skier->Set_position( SKIER_START_X, SKIER_START_Y );
+    Moving_game_object_manager::Instance()->Set_focused_object( g_skier );
+    Moving_game_object_manager::Instance()->Set_focused_object_y( SKIER_START_Y );
+
+    g_race_course = new Race_course();
+}
+
+void Game::Clean_up_game_objects() {
+    delete g_skier;
+    delete g_race_course;
 }
