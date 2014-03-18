@@ -12,6 +12,11 @@ Race_course::Race_course()
       m_gate_separation_y( 400 ),
       m_gate_amplitude_x( 100 )
 {
+    // TODO: Initial gates would ideally depend on screen height.
+    //       This would mean only making as many gates as required to cover the
+    //       screen height.  However, this would be significantly more work for
+    //       a pretty small gain, so it has not been done yet. This change
+    //       would also require changes to Race_course::Update().
     m_gates.push_back( new Gate( "Course_gate_1", Colour::RED,
                        m_horizontal_course_center + 50, Game::SKIER_START_Y + 400,
                        true ) );
