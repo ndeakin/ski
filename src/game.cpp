@@ -169,3 +169,40 @@ void Game::Clean_up_game_objects() {
     delete g_skier;
     delete g_race_course;
 }
+
+void Game::Update_gate_keeping() {
+    static sf::Vector2f last_skier_position = sf::Vector2f( SKIER_START_X,
+                                                            SKIER_START_Y );
+
+    if( g_skier == NULL || g_race_course == NULL ) {
+        Assert( false, EC_GAME_ATTEMPTED_GATE_KEEPING_WITHOUT_SKIER_OR_COURSE );
+        return;
+    }
+    
+    sf::Vector2f skier_position = g_skier->Get_position();
+    Gate const *    next_gate = g_race_course->Get_next_gate();
+
+    if( skier_position.y < next_gate->Get_height() ) {
+        last_skier_position = skier_position;
+        return;
+    }
+
+    if( skier_position.x > next_gate->Get_right_gate_position().x ||
+        skier_position.x < next_gate->Get_left_gate_position().x )
+    {
+        Handle_gate_missed();
+    }
+
+    // TODO: detect and then handle gate collisions
+
+    g_race_course->Increment_next_gate();
+    last_skier_position = skier_position;
+}
+
+void Game::Handle_gate_missed() {
+    g_game_state = EXITING;
+}
+
+void Game::Handle_gate_collision() {
+    // TODO: implement Game::Handle_gate_collision()
+}

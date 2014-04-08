@@ -30,6 +30,13 @@ class Game {
     static Game_object_manager & Get_game_object_manager();
     const static Game_state Get_game_state();
 
+  protected:
+    friend class Game_object_manager;
+
+    // Checks if the skier has missed or collided with a gate,
+    // called by g_game_object_manager during update.
+    static void Update_gate_keeping();
+
   private:
     static bool Is_exiting();
     static void Game_loop();
@@ -41,6 +48,9 @@ class Game {
 
     static void Load_game_objects();
     static void Clean_up_game_objects();
+
+    static void Handle_gate_missed();
+    static void Handle_gate_collision();
 
     static Game_state           g_game_state;
     static sf::RenderWindow     g_main_window;

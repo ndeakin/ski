@@ -28,12 +28,19 @@ class Race_course : public Moving_game_object {
     // amplitude = separation / 2
     unsigned int m_gate_amplitude_x;
 
+    // index of the next gate that the skier will come across
+    size_t m_next_gate_index;
+
   public:
     Race_course();
     ~Race_course();
 
     void Update( sf::Time elapsedd_time );
     void Move( float x, float y, bool manager_shold_handle = true ); 
+
+    Gate const * Get_next_gate() const;
+
+    void Increment_next_gate();
 };
 
 #endif // !_RACCE_COURSE_HPP

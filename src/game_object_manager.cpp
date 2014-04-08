@@ -57,5 +57,7 @@ void Game_object_manager::Update_all( sf::Time delta_time ) {
         itr->second->Update( delta_time );
         itr++;
     }
+    
+    Game::Update_gate_keeping();
 }
 

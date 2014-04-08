@@ -10,7 +10,8 @@ Race_course::Race_course()
       m_num_gates( 0 ),
       m_horizontal_course_center( 800 ),
       m_gate_separation_y( 400 ),
-      m_gate_amplitude_x( 100 )
+      m_gate_amplitude_x( 100 ),
+      m_next_gate_index( 0 )
 {
     // TODO: Initial gates would ideally depend on screen height.
     //       This would mean only making as many gates as required to cover the
@@ -59,9 +60,46 @@ void Race_course::Update( sf::Time elapsed_time ) {
                                      m_num_gates % 2 != 0 ? true : false )  );
         delete *m_gates.begin();
         m_gates.erase( m_gates.begin() );
+        if( m_next_gate_index != 0 ) {
+            --m_next_gate_index;
+        } else {
+            Increment_next_gate();
+        }
     }
 }
 
 void Race_course::Move( float x, float y, bool manager_should_handle ) {
     m_distance_travelled -= y;
+}
+
+Gate const * Race_course::Get_next_gate() const {
+    return const_cast< Gate const * > ( m_gates[m_next_gate_index] );
+}
+
+void Race_course::Increment_next_gate() {
+    if( m_gates.size() < 2 ) {
+        m_next_gate_index = 0;
+        return;
+    }
+
+    size_t next_index = 0;
+
+    for( size_t index = 1; index < m_gates.size(); ++index ) {
+        if( index == m_next_gate_index ||
+            m_gates[index]->Get_height() <
+            m_gates[m_next_gate_index]->Get_height() )
+        {
+            continue;
+        }
+        if( next_index == m_next_gate_index ||
+            m_gates[next_index]->Get_height() <
+            m_gates[m_next_gate_index]->Get_height() ||
+            m_gates[index]->Get_height() <
+            m_gates[next_index]->Get_height() )
+        {
+            next_index = index;
+        }
+    }
+
+    m_next_gate_index = next_index;
 }
