@@ -37,8 +37,12 @@ class Gate : public Moving_game_object {
           bool x_coord_is_left_side = true );
     virtual ~Gate();
 
-    virtual void Set_position( float x, float y );
-    virtual void Update( sf::Time elapsed_time );
+    void Set_position( float x, float y );
+    void Update( sf::Time elapsed_time );
+
+    float Get_height() const;
+    sf::Vector2f Get_left_gate_position() const;
+    sf::Vector2f Get_right_gate_position() const;
 
   private:
     unsigned        m_left_gate_x;

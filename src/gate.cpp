@@ -53,3 +53,15 @@ void Gate::Set_position( float x, float y ) {
 void Gate::Update( sf::Time elapsed_time ) {
     
 }
+
+float Gate::Get_height() const {
+    return m_left_gate.Get_position().y;
+}
+
+sf::Vector2f Gate::Get_left_gate_position() const {
+    return m_left_gate.Get_position();
+}
+
+sf::Vector2f Gate::Get_right_gate_position() const {
+    return m_right_gate.Get_position();
+}
