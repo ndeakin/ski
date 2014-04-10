@@ -40,9 +40,9 @@ void Game_object_manager::Draw_all( sf::RenderWindow & render_window ) {
     }
 }
 
-void Game_object_manager::Update_all( sf::Time delta_time ) {
+void Game_object_manager::Update_all( Game & game, sf::Time delta_time ) {
   
-    if( Game::Get_game_state() != Game::PLAYING ) {
+    if( game.Get_game_state() != Game::PLAYING ) {
         return;
     }
     std::map< std::string, Visible_game_object * >::const_iterator itr =
@@ -50,7 +50,7 @@ void Game_object_manager::Update_all( sf::Time delta_time ) {
   
     // Currently doing timing ourself, but might want this instead at some point
     #if 0
-        Game::Get_window().getFrameTime();
+        game.Get_window().getFrameTime();
     #endif
 
     while( itr != m_game_objects.end() ) {
@@ -58,6 +58,6 @@ void Game_object_manager::Update_all( sf::Time delta_time ) {
         itr++;
     }
     
-    Game::Update_gate_keeping();
+    game.Update_gate_keeping();
 }
 

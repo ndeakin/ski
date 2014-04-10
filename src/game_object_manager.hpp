@@ -5,6 +5,8 @@
 
 #include "visible_game_object.hpp"
 
+class Game;
+
 class Game_object_manager {
   public:
     Game_object_manager();
@@ -14,10 +16,10 @@ class Game_object_manager {
     void Remove( std::string name );
     Visible_game_object * Get( std::string name ) const;
 
-    virtual void Draw_all( sf::RenderWindow & render_window );
-    virtual void Update_all( sf::Time delta_time );
+    void Draw_all( sf::RenderWindow & render_window );
+    void Update_all( Game & game, sf::Time delta_time );
 
-    const static Game_object_manager & Get_game_object_manager();
+    static const Game_object_manager & Get_game_object_manager();
 
   private:
     std::map< std::string, Visible_game_object * > m_game_objects;

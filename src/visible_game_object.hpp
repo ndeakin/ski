@@ -5,9 +5,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Time.hpp>
 
+class Game;
+class Game_object_manager;
+
 class Visible_game_object {
   public:
-    Visible_game_object( std::string name );
+    Visible_game_object( Game * game, std::string name );
     virtual ~Visible_game_object();
 
     virtual void Load( std::string filename = "" );
@@ -30,6 +33,8 @@ class Visible_game_object {
     sf::Sprite & Get_sprite();
 
   private:
+    Game_object_manager *   m_manager;
+
     sf::Sprite      m_sprite;
     sf::Texture *   m_texture;
     std::string     m_filename;

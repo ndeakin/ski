@@ -2,7 +2,8 @@
 #include "moving_game_object_manager.hpp"
 
 Moving_game_object::Moving_game_object( std::string name )
-    : Visible_game_object( name ),
+    : Visible_game_object( Moving_game_object_manager::Instance()->Game_instance(),
+                           name ),
       m_manager( Moving_game_object_manager::Instance() )
 {
     m_manager->Register_object( this );

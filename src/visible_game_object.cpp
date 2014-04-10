@@ -2,20 +2,22 @@
 
 #include "error.hpp"
 #include "game.hpp"
+#include "game_object_manager.hpp"
 #include "sprites.hpp"
 #include "visible_game_object.hpp"
 
-Visible_game_object::Visible_game_object( std::string name )
-    : m_filename( "" ),
+Visible_game_object::Visible_game_object( Game * game, std::string name )
+    : m_manager( &game->Get_game_object_manager() ),
+      m_filename( "" ),
       m_is_responsible_for_texture( false ),
       m_is_loaded( false ),
       m_name( name )
 {
-    Game::Get_game_object_manager().Add( m_name.c_str(), this );
+    m_manager->Add( m_name.c_str(), this );
 }
 
 Visible_game_object::~Visible_game_object() {
-    Game::Get_game_object_manager().Remove( m_name );
+    m_manager->Remove( m_name );
     if( m_is_responsible_for_texture ) {
         delete m_texture;
     }

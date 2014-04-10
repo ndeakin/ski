@@ -12,6 +12,8 @@ class Race_course;
 
 class Game {
   public:
+    Game();
+
     enum Game_state {
         UNINITIALIZED, SHOWING_SPLASH, SHOWING_MENU, PLAYING, PAUSED, EXITING
     };
@@ -23,42 +25,42 @@ class Game {
     static const unsigned SKIER_START_X = 800;
     static const unsigned SKIER_START_Y = 200;
 
-    static void Start();
-    static sf::RenderWindow & Get_window();
+    void Start();
+    sf::RenderWindow & Get_window();
   
-    const static sf::Keyboard::Key & Get_input();
-    static Game_object_manager & Get_game_object_manager();
-    const static Game_state Get_game_state();
+    const sf::Keyboard::Key & Get_input();
+    Game_object_manager & Get_game_object_manager();
+    const Game_state Get_game_state();
 
   protected:
     friend class Game_object_manager;
 
     // Checks if the skier has missed or collided with a gate,
     // called by g_game_object_manager during update.
-    static void Update_gate_keeping();
+    void Update_gate_keeping();
 
   private:
-    static bool Is_exiting();
-    static void Game_loop();
-    static void Update_game_state( sf::Time current_time, sf::Time delta_time );
-    static void Render();
+    bool Is_exiting();
+    void Game_loop();
+    void Update_game_state( sf::Time current_time, sf::Time delta_time );
+    void Render();
 
-    static void Show_splash_screen();
-    static bool Show_menu();
+    void Show_splash_screen();
+    bool Show_menu();
 
-    static void Load_game_objects();
-    static void Clean_up_game_objects();
+    void Load_game_objects();
+    void Clean_up_game_objects();
 
-    static void Handle_gate_missed();
-    static void Handle_gate_collision();
+    void Handle_gate_missed();
+    void Handle_gate_collision();
 
-    static Game_state           g_game_state;
-    static sf::RenderWindow     g_main_window;
-    static Game_object_manager  g_game_object_manager;
-    static bool                 g_is_multiplayer;
+    Game_state           m_game_state;
+    sf::RenderWindow     m_main_window;
+    Game_object_manager  m_game_object_manager;
+    bool                 m_is_multiplayer;
 
-    static Skier *              g_skier;
-    static Race_course *        g_race_course;
+    Skier *              m_skier;
+    Race_course *        m_race_course;
 };
 
 #endif // _GAME_HPP

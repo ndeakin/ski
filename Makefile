@@ -14,10 +14,10 @@ UTILOBJS = $(OBJSDIR)/math_util.o
 
 # TODO: figure out how to match all skiobjs names with $(OBJSDIR) in front of
 #       each of them.
-SKIOBJS = $(OBJSDIR)/ski.o $(OBJSDIR)/game.o $(OBJSDIR)/game_object_manager.o \
-	$(OBJSDIR)/skier.o $(OBJSDIR)/visible_game_object.o $(OBJSDIR)/moving_game_object.o \
+SKIOBJS = $(OBJSDIR)/game.o $(OBJSDIR)/game_object_manager.o $(OBJSDIR)/skier.o \
+	$(OBJSDIR)/visible_game_object.o $(OBJSDIR)/moving_game_object.o \
     $(OBJSDIR)/moving_game_object_manager.o $(OBJSDIR)/gate.o $(OBJSDIR)/race_course.o \
-    $(OBJSDIR)/sprites.o $(OBJSDIR)/error.o
+    $(OBJSDIR)/sprites.o $(OBJSDIR)/error.o $(OBJSDIR)/ski.o
 
 ski : $(SKIOBJS) $(UTILOBJS)
 	$(CC) -o $(OBJSDIR)/ski $(LDFLAGS) $(SKIOBJS) $(UTILOBJS) \

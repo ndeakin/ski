@@ -1,7 +1,9 @@
 #include "game.hpp"
 
 int main( int argc, char ** argv ) {
-    Game::Start();
+    Game game;
+
+    game.Start();
 
     return 0;
 }

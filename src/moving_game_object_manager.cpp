@@ -10,10 +10,19 @@ Moving_game_object_manager::~Moving_game_object_manager() {
 }
 
 Moving_game_object_manager  g_moving_game_object_manager;
-//Moving_game_object_manager g_moving_game_object_manager = Moving_game_object_manager();
 
+// static
+void Moving_game_object_manager::Initialize( Game * game ) {
+    g_moving_game_object_manager.m_game = game;
+}
+
+// static
 Moving_game_object_manager *    Moving_game_object_manager::Instance() {
     return &g_moving_game_object_manager;
+}
+
+Game * Moving_game_object_manager::Game_instance() {
+    return m_game;
 }
 
 void Moving_game_object_manager::Register_object( Moving_game_object * object ) {

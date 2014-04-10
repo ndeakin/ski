@@ -10,6 +10,8 @@ class Moving_game_object : public Visible_game_object {
     Moving_game_object_manager * m_manager;
 
   public:
+    // NOTE: Do not create moving game objects before Moving_game_object::Initialize()
+    //       is called
     Moving_game_object( std::string name );
     virtual ~Moving_game_object();
 
