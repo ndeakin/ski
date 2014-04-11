@@ -4,7 +4,7 @@
 #include "moving_game_object_manager.hpp"
 #include "race_course.hpp"
 #include "skier.hpp"
-//#include "splash_screen.hpp"
+#include "splash_screen.hpp"
 #include "sprites.hpp"
 
 #include <SFML/System/Clock.hpp>
@@ -17,6 +17,7 @@
 Game::Game()
     : m_game_state( UNINITIALIZED ),
       m_is_multiplayer( false ),
+      m_splash_screen( NULL ),
       m_skier( NULL ),
       m_race_course( NULL )
 {}
@@ -36,10 +37,9 @@ void Game::Start() {
 
     Load_game_objects();
 
-    m_game_state = Game::PLAYING;
-    // Skip Splash for now
-    //m_game_state = Game::SHOWING_MENU;
-    //m_game_state = Game::SHOWING_SPLASH;
+    // Skip menu for now
+    //m_game_state = SHOWING_MENU;
+    m_game_state = SHOWING_SPLASH;
     Game_loop();
   
     Clean_up_game_objects();
@@ -104,9 +104,14 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
             break;
         }
         case Game::SHOWING_SPLASH: {
-            // TODO: Show_splash_screen doesn't actually do anything currently,
-            //       other than change the game state to the menu
             Show_splash_screen();
+            if( m_splash_screen != NULL ) {
+                m_splash_screen->Update();
+
+                if( m_splash_screen->Is_finished() ) {
+                    Done_showing_splash_screen();
+                }
+            }
             break;
         }
         case Game::PLAYING: {
@@ -140,10 +145,16 @@ void Game::Render() {
 }
 
 void Game::Show_splash_screen() {
-    // TODO: implement class Splash_screen
-    // Splash_screen splash_screen;
-    // splash_screen.Show( m_main_window );
-    m_game_state = Game::SHOWING_MENU;
+    if( m_splash_screen == NULL ) {
+        m_splash_screen = new Splash_screen( this, "Splash Screen" );
+        m_splash_screen->Show_in( m_main_window );
+    }
+}
+
+void Game::Done_showing_splash_screen() {
+    delete m_splash_screen;
+    // TODO: change game state to menu instead of playing after splash
+    m_game_state = PLAYING;
 }
 
 // TODO: Fix the implementation of Show_menu (returns bool? not very intuitive).

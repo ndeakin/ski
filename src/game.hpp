@@ -9,6 +9,7 @@
 #include "skier.hpp"
 
 class Race_course;
+class Splash_screen;
 
 class Game {
   public:
@@ -18,6 +19,7 @@ class Game {
         UNINITIALIZED, SHOWING_SPLASH, SHOWING_MENU, PLAYING, PAUSED, EXITING
     };
 
+    // TODO: support multiple resolutions
     static const int SCREEN_WIDTH =  1600;
     static const int SCREEN_HEIGHT = 900;
 
@@ -46,6 +48,7 @@ class Game {
     void Render();
 
     void Show_splash_screen();
+    void Done_showing_splash_screen();
     bool Show_menu();
 
     void Load_game_objects();
@@ -54,13 +57,15 @@ class Game {
     void Handle_gate_missed();
     void Handle_gate_collision();
 
-    Game_state           m_game_state;
-    sf::RenderWindow     m_main_window;
-    Game_object_manager  m_game_object_manager;
-    bool                 m_is_multiplayer;
+    Game_state          m_game_state;
+    sf::RenderWindow    m_main_window;
+    Game_object_manager m_game_object_manager;
+    bool                m_is_multiplayer;
 
-    Skier *              m_skier;
-    Race_course *        m_race_course;
+    Splash_screen *     m_splash_screen;
+
+    Skier *             m_skier;
+    Race_course *       m_race_course;
 };
 
 #endif // _GAME_HPP
