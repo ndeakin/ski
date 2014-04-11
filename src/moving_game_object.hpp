@@ -16,7 +16,7 @@ class Moving_game_object : public Visible_game_object {
     virtual ~Moving_game_object();
 
     // Called with the elapsed time since the previous call.
-    virtual void Update( sf::Time elapsed_time );
+    virtual void Update( sf::Time elapsed_time ) = 0;
 
     // Move x and y away from current position.
     virtual void Move( float x, float y, bool manager_should_handle = true );
