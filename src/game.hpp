@@ -66,6 +66,8 @@ class Game {
 
     Skier *             m_skier;
     Race_course *       m_race_course;
+
+    bool                m_game_objects_loaded;
 };
 
 #endif // _GAME_HPP

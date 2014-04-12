@@ -19,7 +19,8 @@ Game::Game()
       m_is_multiplayer( false ),
       m_splash_screen( NULL ),
       m_skier( NULL ),
-      m_race_course( NULL )
+      m_race_course( NULL ),
+      m_game_objects_loaded( false )
 {}
 
 void Game::Start() {
@@ -30,15 +31,15 @@ void Game::Start() {
     Moving_game_object_manager::Initialize( this );
 
     // The 0th entry of the array-like object returned by getFullscreenModes()
-    // is always the video mode with the best resolution and colour depth.
-    m_main_window.create( sf::VideoMode::getFullscreenModes()[0],
+    // is always the video mode with the best resolution and colour depth:
+    //     sf::VideoMode::getFullscreenModes()[0]
+    //
+    // This may be useful in the future for supporting multiple resolutions
+
+    m_main_window.create( sf::VideoMode( SCREEN_WIDTH, SCREEN_HEIGHT ),
                           "Ski!",
                           sf::Style::Fullscreen );
 
-    Load_game_objects();
-
-    // Skip menu for now
-    //m_game_state = SHOWING_MENU;
     m_game_state = SHOWING_SPLASH;
     Game_loop();
   
@@ -105,6 +106,11 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
         }
         case Game::SHOWING_SPLASH: {
             Show_splash_screen();
+
+            if( !m_game_objects_loaded ) {
+                Load_game_objects();
+            }
+
             if( m_splash_screen != NULL ) {
                 m_splash_screen->Update();
 
@@ -169,12 +175,19 @@ bool Game::Show_menu() {
 void Game::Load_game_objects() {
     Sprites::Initialize_sprite_sheet();
 
+    delete m_skier;
     m_skier = new Skier( "Skier" );
+    Assert( m_skier != NULL, FE_OUT_OF_MEMORY );
+
     m_skier->Set_position( SKIER_START_X, SKIER_START_Y );
     Moving_game_object_manager::Instance()->Set_focused_object( m_skier );
     Moving_game_object_manager::Instance()->Set_focused_object_y( SKIER_START_Y );
 
+    delete m_race_course;
     m_race_course = new Race_course();
+    Assert( m_race_course != NULL, FE_OUT_OF_MEMORY );
+
+    m_game_objects_loaded = true;
 }
 
 void Game::Clean_up_game_objects() {
