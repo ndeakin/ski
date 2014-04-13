@@ -9,14 +9,10 @@ class Game;
 
 class Splash_screen : public Visible_game_object {
   private:
-    sf::Sprite *    m_sprite;
-    sf::Image *     m_image;
-
     bool            m_is_finished;
 
   public:
     Splash_screen( Game * game, std::string name );
-    ~Splash_screen();
 
     void Update();
     void Update( sf::Time elapsed_time );
