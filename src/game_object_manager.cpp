@@ -1,5 +1,3 @@
-#include <cstring>
-
 #include "game.hpp"
 #include "game_object_manager.hpp"
 
