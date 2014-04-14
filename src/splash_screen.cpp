@@ -22,7 +22,5 @@ void Splash_screen::Update() {
 }
 
 void Splash_screen::Update( sf::Time elapsed_time ) {
-    if( sf::Keyboard::isKeyPressed( sf::Keyboard::Space ) ) {
-        m_is_finished = true;
-    }
+    Update();
 }

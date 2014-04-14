@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include "game.hpp"
 #include "game_object_manager.hpp"
 
@@ -31,12 +33,24 @@ Visible_game_object * Game_object_manager::Get( std::string name ) const {
 }
 
 void Game_object_manager::Draw_all( sf::RenderWindow & render_window ) {
-    std::map< std::string, Visible_game_object * >::const_iterator itr = 
+    std::map< std::string, Visible_game_object * >::const_iterator itr =
             m_game_objects.begin();
 
+    std::map< std::string, Visible_game_object * >::const_iterator menu_itr =
+            m_game_objects.end();
+
     while( itr != m_game_objects.end() ) {
-        itr->second->Draw( render_window );
+        // remember the menu and draw it last since it should be over everything
+        if( itr->first == "Menu" ) {
+            menu_itr = itr;
+        } else {
+            itr->second->Draw( render_window );
+        }
         ++itr;
+    }
+
+    if( menu_itr != m_game_objects.end() ) {
+        menu_itr->second->Draw( render_window );
     }
 }
 

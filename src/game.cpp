@@ -12,12 +12,11 @@
 #include <SFML/Window.hpp>
 #include <SFML/Window/Event.hpp>
 
-// TODO: create Is_multiplayer() and Set_multiplayer( bool ) functions
-
 Game::Game()
     : m_game_state( UNINITIALIZED ),
       m_is_multiplayer( false ),
       m_splash_screen( NULL ),
+      m_menu( NULL ),
       m_skier( NULL ),
       m_race_course( NULL ),
       m_game_objects_loaded( false )
@@ -98,10 +97,17 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
 
     switch( m_game_state ) {
         case Game::SHOWING_MENU: {
-            // TODO: See note at Game::Show_menu defintion
-            if( Show_menu() ) {
-                // TODO: move Load_game_objects() call to here once menu is used
+            Show_menu();
+
+            if( m_menu != NULL ) {
+                m_menu->Update();
+
+                Menu::Menu_result result = m_menu->Get_result();
+                if( result != Menu::UNDECIDED ) {
+                    Done_showing_menu( result );
+                }
             }
+
             break;
         }
         case Game::SHOWING_SPLASH: {
@@ -159,17 +165,31 @@ void Game::Show_splash_screen() {
 
 void Game::Done_showing_splash_screen() {
     delete m_splash_screen;
-    // TODO: change game state to menu instead of playing after splash
-    m_game_state = PLAYING;
+    m_splash_screen = NULL;
+    m_game_state = SHOWING_MENU;
 }
 
-// TODO: Fix the implementation of Show_menu (returns bool? not very intuitive).
-bool Game::Show_menu() {
-    if( m_game_state == Game::SHOWING_MENU ) {
-        return true;
-    } else {
-        return false;
+void Game::Show_menu() {
+    if( m_menu == NULL ) {
+        m_menu = new Menu( this, "Menu" );
+        m_menu->Show_in( m_main_window );
     }
+}
+
+void Game::Done_showing_menu( Menu::Menu_result result ) {
+    switch( result ) {
+        case Menu::PLAY:
+            m_game_state = PLAYING;
+            break;
+        case Menu::EXIT:
+            m_game_state = EXITING;
+            break;
+        case Menu::UNDECIDED:
+            return;
+            break;
+    }
+    delete m_menu;
+    m_menu = NULL;
 }
 
 void Game::Load_game_objects() {

@@ -6,6 +6,7 @@
 #include <SFML/System/Time.hpp>
 
 #include "game_object_manager.hpp"
+#include "menu.hpp"
 #include "skier.hpp"
 
 class Race_course;
@@ -49,7 +50,8 @@ class Game {
 
     void Show_splash_screen();
     void Done_showing_splash_screen();
-    bool Show_menu();
+    void Show_menu();
+    void Done_showing_menu( Menu::Menu_result result);
 
     void Load_game_objects();
     void Clean_up_game_objects();
@@ -63,6 +65,7 @@ class Game {
     bool                m_is_multiplayer;
 
     Splash_screen *     m_splash_screen;
+    Menu *              m_menu;
 
     Skier *             m_skier;
     Race_course *       m_race_course;

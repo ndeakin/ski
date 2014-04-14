@@ -17,7 +17,8 @@ UTILOBJS = $(OBJSDIR)/math_util.o
 SKIOBJS = $(OBJSDIR)/game.o $(OBJSDIR)/game_object_manager.o $(OBJSDIR)/skier.o \
 	$(OBJSDIR)/visible_game_object.o $(OBJSDIR)/moving_game_object.o \
     $(OBJSDIR)/moving_game_object_manager.o $(OBJSDIR)/gate.o $(OBJSDIR)/race_course.o \
-    $(OBJSDIR)/sprites.o $(OBJSDIR)/error.o $(OBJSDIR)/splash_screen.o
+    $(OBJSDIR)/sprites.o $(OBJSDIR)/error.o $(OBJSDIR)/splash_screen.o \
+    $(OBJSDIR)/menu.o
 
 SKIOBJS += $(OBJSDIR)/ski.o
 
