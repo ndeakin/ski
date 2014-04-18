@@ -172,7 +172,6 @@ void Game::Done_showing_splash_screen() {
 void Game::Show_menu() {
     if( m_menu == NULL ) {
         m_menu = new Menu( this, "Menu" );
-        m_menu->Show_in( m_main_window );
     }
 }
 
