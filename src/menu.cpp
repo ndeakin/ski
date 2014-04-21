@@ -1,3 +1,4 @@
+#include "error.hpp"
 #include "menu.hpp"
 
 #include <SFML/Graphics.hpp>
@@ -56,11 +57,11 @@ Menu::Menu( Game * game, std::string name )
     Load( "images/menu_background.png" );
     
     m_play_button = new Button( game, "Play button", PLAY_NORMAL_RECT, PLAY_HOVER_RECT );
-    // TODO: check for allocation failure
+    Assert( m_play_button != NULL, FE_OUT_OF_MEMORY );
     m_play_button->Set_position( 100, 100 );
     
     m_exit_button = new Button( game, "Exit button", EXIT_NORMAL_RECT, EXIT_HOVER_RECT );
-    // TODO: check for allocation failure
+    Assert( m_exit_button != NULL, FE_OUT_OF_MEMORY );
     m_exit_button->Set_position( 100, 205 );
 }
 
