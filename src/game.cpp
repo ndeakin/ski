@@ -84,11 +84,7 @@ const Game::Game_state Game::Get_game_state() {
 }
 
 bool Game::Is_exiting() {
-    if( m_game_state == Game::EXITING ) {
-        return true;
-    } else {
-        return false;
-    }
+    return m_game_state == Game::EXITING;
 }
 
 void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
@@ -96,7 +92,7 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
     m_main_window.pollEvent( current_event );
 
     switch( m_game_state ) {
-        case Game::SHOWING_MENU: {
+        case SHOWING_MENU: {
             Show_menu();
 
             if( m_menu != NULL ) {
@@ -110,7 +106,7 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
 
             break;
         }
-        case Game::SHOWING_SPLASH: {
+        case SHOWING_SPLASH: {
             Show_splash_screen();
 
             if( !m_game_objects_loaded ) {
@@ -126,20 +122,17 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
             }
             break;
         }
-        case Game::PLAYING: {
+        case PLAYING: {
             m_main_window.clear( sf::Color( 0xFF, 0xFF, 0xFF ) );
 
             m_game_object_manager.Update_all( *this, delta_time );
 
             if( current_event.type == sf::Event::Closed ) {
-                m_game_state = Game::EXITING;
+                m_game_state = EXITING;
             }
       
             if( sf::Keyboard::isKeyPressed( sf::Keyboard::Escape ) ) {
-                m_game_state = EXITING;
-
-                // TODO: should open a menu instead of exiting
-                // NOTE: make sure to stop objects from moving while game is paused
+                m_game_state = SHOWING_MENU;
             }
             break;
         }
