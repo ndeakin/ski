@@ -20,6 +20,13 @@ platforms to the Makefile.
 ##Future Development
 
 The game currently shows a skier that can be controlled as they ski down a
-white background with gates (going through the gates is optional). Fleshing
-out the graphics (ex. adding more skier and gate sprites) and improving physics
-(ex. implementing more physics) are the main priorities currently.
+white background with gates. Adding more game features and, less importantly,
+fleshing out the graphics (ex. adding more skier and gate sprites) are the main
+priorities currently.
+
+
+##Other Notes
+
+The sprites used for the skiers and gates (and any others you recognize from
+images/skiing_sprite_sheet.png) are not created by me, but by Tiertex Design
+Studios.
