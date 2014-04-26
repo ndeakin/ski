@@ -65,6 +65,7 @@ class Game {
     bool                m_is_multiplayer;
 
     Splash_screen *     m_splash_screen;
+    bool                m_done_start_splash;
     Menu *              m_menu;
 
     Skier *             m_skier;

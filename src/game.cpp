@@ -118,6 +118,7 @@ void Game::Update_game_state( sf::Time current_time, sf::Time delta_time ) {
 
                 if( m_splash_screen->Is_finished() ) {
                     Done_showing_splash_screen();
+                    m_done_start_splash = true;
                 }
             }
             break;
@@ -152,13 +153,24 @@ void Game::Render() {
 void Game::Show_splash_screen() {
     if( m_splash_screen == NULL ) {
         m_splash_screen = new Splash_screen( this, "Splash Screen" );
-        m_splash_screen->Show_in( m_main_window );
+        if( !m_done_start_splash ) {
+            m_splash_screen->Show();
+        } else {
+            m_splash_screen->Show( "images/disqualified.png" );
+        }
     }
 }
 
 void Game::Done_showing_splash_screen() {
+    if( m_done_start_splash ) {
+        // Set up for next race
+        Clean_up_game_objects();
+        Load_game_objects();
+    }
+
     delete m_splash_screen;
     m_splash_screen = NULL;
+
     m_game_state = SHOWING_MENU;
 }
 
@@ -204,7 +216,9 @@ void Game::Load_game_objects() {
 
 void Game::Clean_up_game_objects() {
     delete m_skier;
+    m_skier = NULL;
     delete m_race_course;
+    m_race_course = NULL;
 }
 
 void Game::Update_gate_keeping() {
@@ -237,7 +251,7 @@ void Game::Update_gate_keeping() {
 }
 
 void Game::Handle_gate_missed() {
-    m_game_state = EXITING;
+    m_game_state = SHOWING_SPLASH;
 }
 
 void Game::Handle_gate_collision() {

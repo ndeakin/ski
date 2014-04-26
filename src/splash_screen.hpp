@@ -24,7 +24,7 @@ class Splash_screen : public Visible_game_object {
     void Update( sf::Time elapsed_time );
 
     bool Is_finished();
-    void Show_in( sf::RenderWindow & render_window );
+    void Show( char const * image = "" );
 };
 
 #endif // !_SPLASH_SCREEN_PP

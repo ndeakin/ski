@@ -1,5 +1,7 @@
 #include "splash_screen.hpp"
 
+#include <cstring>
+
 #include <SFML/Graphics.hpp>
 
 Splash_screen::Splash_screen( Game * game, std::string name )
@@ -7,8 +9,12 @@ Splash_screen::Splash_screen( Game * game, std::string name )
       m_is_finished( false )
 {}
 
-void Splash_screen::Show_in( sf::RenderWindow & render_window ) {
-    Load( "images/splash_screen.png" );
+void Splash_screen::Show( char const * image ) {
+    if( strcmp( image, "" ) == 0 ) {
+        Load( "images/splash_screen.png" );
+    } else {
+        Load( image );
+    }
 }
 
 bool Splash_screen::Is_finished() {
