@@ -8,6 +8,8 @@ Race_course::Race_course()
     : Moving_game_object( "Race Course" ),
       m_distance_travelled( 0.0f ),
       m_num_gates( 0 ),
+      m_course_length( 0 ),
+      m_gates_passed( 0 ),
       m_horizontal_course_center( 800 ),
       m_gate_separation_y( 400 ),
       m_gate_amplitude_x( 100 ),
@@ -76,10 +78,12 @@ Gate const * Race_course::Get_next_gate() const {
     return const_cast< Gate const * > ( m_gates[m_next_gate_index] );
 }
 
-void Race_course::Increment_next_gate() {
+bool Race_course::Increment_next_gate() {
+    ++m_gates_passed;
+
     if( m_gates.size() < 2 ) {
         m_next_gate_index = 0;
-        return;
+        return false;
     }
 
     size_t next_index = 0;
@@ -102,4 +106,9 @@ void Race_course::Increment_next_gate() {
     }
 
     m_next_gate_index = next_index;
+    
+    if( m_gates_passed >= m_course_length ) {
+        return true;
+    }
+    return false;
 }

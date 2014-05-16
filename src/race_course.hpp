@@ -15,6 +15,12 @@ class Race_course : public Moving_game_object {
     // Number of gates the course has made so far
     unsigned int    m_num_gates;
 
+    // Total length of the course. A value of zero is treated as infinite length.
+    unsigned int    m_course_length;
+
+    // Number of gates the skier has passed so far
+    unsigned int    m_gates_passed;
+
     // X-coordinate that the course is centered about.
     // TODO: currently this will just be the center of the screen, or some
     //       other fixed position, but in the future, this combined with the
@@ -40,7 +46,14 @@ class Race_course : public Moving_game_object {
 
     Gate const * Get_next_gate() const;
 
-    void Increment_next_gate();
+    // Set the length (in gates) of the course.
+    void Set_course_length( unsigned int new_length )
+    {
+        m_course_length = new_length;
+    }
+
+    // Returns true if there are no more gates in the course
+    bool Increment_next_gate();
 };
 
 #endif // !_RACCE_COURSE_HPP

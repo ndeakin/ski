@@ -19,6 +19,7 @@ Game::Game()
       m_menu( NULL ),
       m_skier( NULL ),
       m_race_course( NULL ),
+      m_course_finished( false ),
       m_game_objects_loaded( false )
 {}
 
@@ -153,10 +154,15 @@ void Game::Render() {
 void Game::Show_splash_screen() {
     if( m_splash_screen == NULL ) {
         m_splash_screen = new Splash_screen( this, "Splash Screen" );
+        // TODO: maybe fix this hacky thing where everything is a splash scrren?
         if( !m_done_start_splash ) {
             m_splash_screen->Show();
         } else {
-            m_splash_screen->Show( "images/disqualified.png" );
+            if( m_course_finished ) {
+                m_splash_screen->Show( "images/race_finished.png" );
+            } else {
+                m_splash_screen->Show( "images/disqualified.png" );
+            }
         }
     }
 }
@@ -210,6 +216,8 @@ void Game::Load_game_objects() {
     delete m_race_course;
     m_race_course = new Race_course();
     Assert( m_race_course != NULL, FE_OUT_OF_MEMORY );
+    m_race_course->Set_course_length( 10 );
+    m_course_finished = false;
 
     m_game_objects_loaded = true;
 }
@@ -245,9 +253,12 @@ void Game::Update_gate_keeping() {
     }
 
     // TODO: detect and then handle gate collisions
-
-    m_race_course->Increment_next_gate();
+    
     last_skier_position = skier_position;
+
+    if( m_race_course->Increment_next_gate() ) {
+        Handle_course_finished();
+    }
 }
 
 void Game::Handle_gate_missed() {
@@ -256,4 +267,9 @@ void Game::Handle_gate_missed() {
 
 void Game::Handle_gate_collision() {
     // TODO: implement Game::Handle_gate_collision()
+}
+
+void Game::Handle_course_finished() {
+    m_course_finished = true;
+    m_game_state = SHOWING_SPLASH;
 }

@@ -58,6 +58,7 @@ class Game {
 
     void Handle_gate_missed();
     void Handle_gate_collision();
+    void Handle_course_finished();
 
     Game_state          m_game_state;
     sf::RenderWindow    m_main_window;
@@ -70,6 +71,7 @@ class Game {
 
     Skier *             m_skier;
     Race_course *       m_race_course;
+    bool                m_course_finished;
 
     bool                m_game_objects_loaded;
 };
