@@ -50,22 +50,25 @@ void Race_course::Update( sf::Time elapsed_time ) {
     if(  ( m_distance_travelled - Game::SKIER_START_Y ) / m_gate_separation_y >
          m_num_gates - 2 )
     {
-        char name_string[16];
-        snprintf( name_string, 16, "Course_gate_%i", ++m_num_gates );
-        m_gates.push_back( new Gate( name_string,
-                                     m_num_gates % 2 == 0 ? Colour::BLUE : Colour::RED,
-                                     m_horizontal_course_center + 100 -
-                                     ( m_num_gates % 2 == 0 ? 200 : 0 ),
-                                     NEW_GATE_SPAWN_Y,
-                                     // if odd number,
-                                     // then x_coord_is_left_side is true
-                                     m_num_gates % 2 != 0 ? true : false )  );
-        delete *m_gates.begin();
-        m_gates.erase( m_gates.begin() );
-        if( m_next_gate_index != 0 ) {
-            --m_next_gate_index;
-        } else {
-            Increment_next_gate();
+        if( m_num_gates < m_course_length ) {
+            char name_string[16];
+            snprintf( name_string, 16, "Course_gate_%i", ++m_num_gates );
+            m_gates.push_back( new Gate( name_string,
+                                         m_num_gates % 2 == 0 ? Colour::BLUE : Colour::RED,
+                                         m_horizontal_course_center + 100 -
+                                         ( m_num_gates % 2 == 0 ? 200 : 0 ),
+                                         NEW_GATE_SPAWN_Y,
+                                         // if odd number,
+                                         // then x_coord_is_left_side is true
+                                         m_num_gates % 2 != 0 ? true : false )  );
+            delete *m_gates.begin();
+            m_gates.erase( m_gates.begin() );
+
+            if( m_next_gate_index != 0 ) {
+                --m_next_gate_index;
+            } else {
+                Increment_next_gate();
+            }
         }
     }
 }
