@@ -11,7 +11,8 @@ Skier::Skier( char const * name )
       // TODO: verify a value for terminal velocity, and impliment
       // some sort of wind resisitance in the form of approaching
       // terminal velocity.
-      m_terminal_velocity( 0.55f )
+      m_terminal_velocity( 0.55f ),
+      m_run_time( sf::seconds( 0.0f ) )
 {
     Load();
     Get_sprite().setTextureRect( Sprites::SKIER_CARVE_270 );
@@ -19,7 +20,13 @@ Skier::Skier( char const * name )
 
 Skier::~Skier() {}
 
+sf::Time Skier::Get_run_time() {
+    return m_run_time;
+}
+
 void Skier::Update( sf::Time elapsed_time ) {
+    m_run_time += elapsed_time;
+
     Update_velocity( elapsed_time );
     Update_sprite( elapsed_time );
 }

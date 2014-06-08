@@ -10,12 +10,14 @@ class Skier : public Moving_game_object {
     Skier( char const * name );
     ~Skier();
 
+    sf::Time Get_run_time();
     void Update( sf::Time elapsed_time ); 
 
-    sf::Vector2< long double > m_velocity;
-    long double  m_terminal_velocity;
-
   private:
+    sf::Vector2< long double > m_velocity;
+    long double m_terminal_velocity;
+    sf::Time    m_run_time;
+
     // Used internally for angle calculations
     struct Sprite_angle;
 

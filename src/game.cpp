@@ -272,4 +272,6 @@ void Game::Handle_gate_collision() {
 void Game::Handle_course_finished() {
     m_course_finished = true;
     m_game_state = SHOWING_SPLASH;
+
+    // TODO: use the skier's time and display it on the finish screen
 }
