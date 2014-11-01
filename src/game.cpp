@@ -275,3 +275,8 @@ void Game::Handle_course_finished() {
 
     // TODO: use the skier's time and display it on the finish screen
 }
+
+void Game::Show_time( sf::Time race_time ) {
+    // TODO: show the skier's time at the end of a race
+    //       to be called in Handle_course_finished()
+}

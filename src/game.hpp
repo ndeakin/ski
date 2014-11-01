@@ -60,6 +60,8 @@ class Game {
     void Handle_gate_collision();
     void Handle_course_finished();
 
+    void Show_time( sf::Time race_time );
+
     Game_state          m_game_state;
     sf::RenderWindow    m_main_window;
     Game_object_manager m_game_object_manager;
