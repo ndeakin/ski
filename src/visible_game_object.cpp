@@ -87,11 +87,11 @@ bool Visible_game_object::Is_loaded() const {
 }
 
 float Visible_game_object::Get_height() const {
-    return m_texture->getSize().y;
+    return m_sprite.getTextureRect().height;
 }
 
 float Visible_game_object::Get_width() const {
-    return m_texture->getSize().x;
+    return m_sprite.getTextureRect().width;
 }
 
 sf::Rect< float > Visible_game_object::Get_bounding_rect() const {
