@@ -1,6 +1,8 @@
 #ifndef _SKIER_SPRITES_HPP
 #define _SKIER_SPRITES_HPP
 
+#include <SFML/Graphics.hpp>
+
 // Note: The origin on the image is the top left corner.
 
 namespace Sprites {

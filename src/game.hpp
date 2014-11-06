@@ -11,6 +11,7 @@
 
 class Race_course;
 class Splash_screen;
+class Time_digit;
 
 class Game {
   public:
@@ -60,7 +61,7 @@ class Game {
     void Handle_gate_collision();
     void Handle_course_finished();
 
-    void Show_time( sf::Time race_time );
+    void Show_time( sf::Time sf_race_time );
 
     Game_state          m_game_state;
     sf::RenderWindow    m_main_window;
@@ -76,6 +77,9 @@ class Game {
     bool                m_course_finished;
 
     bool                m_game_objects_loaded;
+
+    bool                m_time_present;
+    Time_digit *        m_time_digits[9];
 };
 
 #endif // _GAME_HPP

@@ -6,6 +6,8 @@
 #include "skier.hpp"
 #include "splash_screen.hpp"
 #include "sprites.hpp"
+#include "time_digit.hpp"
+#include "time_digit_sprites.hpp"
 
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
@@ -20,8 +22,13 @@ Game::Game()
       m_skier( NULL ),
       m_race_course( NULL ),
       m_course_finished( false ),
-      m_game_objects_loaded( false )
-{}
+      m_game_objects_loaded( false ),
+      m_time_present( false )
+{
+    for( int i = 0; i < 9; i++ ) {
+        m_time_digits[i] = NULL;
+    }
+}
 
 void Game::Start() {
     if( m_game_state != UNINITIALIZED ) {
@@ -174,6 +181,14 @@ void Game::Done_showing_splash_screen() {
         Load_game_objects();
     }
 
+    if( m_time_present ) {
+        for( int i = 0; i < 9; i++ ) {
+            delete m_time_digits[i];
+            m_time_digits[i] = NULL;
+        }
+        m_time_present = false;
+    }
+
     delete m_splash_screen;
     m_splash_screen = NULL;
 
@@ -276,7 +291,74 @@ void Game::Handle_course_finished() {
     Show_time( m_skier->Get_run_time() );
 }
 
-void Game::Show_time( sf::Time race_time ) {
+void Game::Show_time( sf::Time sf_race_time ) {
     // TODO: show the skier's time at the end of a race
     //       to be called in Handle_course_finished()
+    // 790 left
+    // 585 top
+
+    m_time_present = true;
+
+    long int race_time = sf_race_time.asMilliseconds();
+
+    long int time_minutes = race_time / (1000 * 60);
+    long int time_seconds = race_time / 1000;
+    long int time_ms = race_time % 1000;
+
+    // Where the digits should be placed
+    float left_position = 790.0;
+    float top_position = 585.0;
+
+    m_time_digits[0] = new Time_digit( this,
+                            "time_minute_1",
+                            Time_digit::Get_int_rect( time_minutes / 10 ) );
+    m_time_digits[0]->Set_position( left_position, top_position );
+    left_position += m_time_digits[0]->Get_width();
+
+    m_time_digits[1] = new Time_digit( this,
+                            "time_minute_2",
+                            Time_digit::Get_int_rect( time_minutes % 10 ) );
+    m_time_digits[1]->Set_position( left_position, top_position );
+    left_position += m_time_digits[1]->Get_width();
+
+    m_time_digits[2] = new Time_digit( this,
+                            "time_colon",
+                            Sprites::TIME_DIGIT_COLON );
+    m_time_digits[2]->Set_position( left_position, top_position );
+    left_position += m_time_digits[2]->Get_width();
+
+    m_time_digits[3] = new Time_digit( this,
+                            "time_second_1",
+                            Time_digit::Get_int_rect( time_seconds / 10 ) );
+    m_time_digits[3]->Set_position( left_position, top_position );
+    left_position += m_time_digits[3]->Get_width();
+
+    m_time_digits[4] = new Time_digit( this,
+                            "time_second_2",
+                            Time_digit::Get_int_rect( time_seconds % 10 ) );
+    m_time_digits[4]->Set_position( left_position, top_position );
+    left_position += m_time_digits[4]->Get_width();
+
+    m_time_digits[5] = new Time_digit( this,
+                            "time_period",
+                            Sprites::TIME_DIGIT_PERIOD );
+    m_time_digits[5]->Set_position( left_position, top_position );
+    left_position += m_time_digits[5]->Get_width();
+
+    m_time_digits[6] = new Time_digit( this,
+                            "time_ms_1",
+                            Time_digit::Get_int_rect( (time_ms / 100) % 10 ) );
+    m_time_digits[6]->Set_position( left_position, top_position );
+    left_position += m_time_digits[6]->Get_width();
+
+    m_time_digits[7] = new Time_digit( this,
+                            "time_ms_2",
+                            Time_digit::Get_int_rect( (time_ms / 10) % 10 ) );
+    m_time_digits[7]->Set_position( left_position, top_position );
+    left_position += m_time_digits[7]->Get_width();
+
+    m_time_digits[8] = new Time_digit( this,
+                            "time_ms_3",
+                            Time_digit::Get_int_rect( time_ms % 10 ) );
+    m_time_digits[8]->Set_position( left_position, top_position );
 }
